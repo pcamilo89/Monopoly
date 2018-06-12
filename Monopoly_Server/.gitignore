@@ -1,6 +1,9 @@
 # Java files
 *.class
 
+# json files
+*.json
+
 # Netbeans files
 /nbproject/private/*
 !nbproject/project.properties
