@@ -74,8 +74,11 @@ public class UserViewController {
     
     public static void deleteSelectedUser(){
         User user = getSelectedUser();
-        UserJson.deleteUser(user);
-        UserJson.loadUserList();
+        if ( user != null ){
+            UserJson.deleteUser(user);
+            UserJson.loadUserList();
+        }
+        
     }
     
     public static void addButton(){
