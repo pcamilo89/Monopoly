@@ -13,7 +13,7 @@ import model.UserJson;
  *
  * @author Camilo
  */
-public class AddUserToJson {
+public class TestAddUserToJson {
     public static void main(String args[]){
         User tempUser =  new User("Camilo", "Perez", "pcamilo89", "1234");
         UserJson.addUser(tempUser);

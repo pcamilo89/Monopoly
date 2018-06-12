@@ -14,7 +14,7 @@ import view.UserView;
  *
  * @author Camilo
  */
-public class UserListTest {
+public class TestUserList {
     public static void main(String args[]){
         Core.userList = new UserList();
         
