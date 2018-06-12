@@ -1,0 +1,22 @@
+# Java files
+*.class
+
+# Netbeans files
+/nbproject/private/*
+!nbproject/project.properties
+!nbproject/project.xml
+
+/build/*
+/dist/*
+*.log
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+
+# Packages
+*.zip
+*.rar
