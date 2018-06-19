@@ -17,7 +17,10 @@ public class Core {
     public static Server server;
     public static UserList userList;
     
-    public static ArrayList<Jugador> playerList;
+    public static ArrayList<Card> chanceList;
+    public static ArrayList<Card> communityList;
+    
+    public static ArrayList<Player> playerList;
     
     public static boolean juegoEnCurso = false;
     
@@ -72,7 +75,7 @@ public class Core {
         playerList.clear();
         for (Connection conn : server.list) {
             if (conn.getUser() != null){
-                playerList.add(new Jugador(conn.getUser(), Utils.GAME_INITIAL_MONEY));
+                playerList.add(new Player(conn.getUser(), Utils.GAME_INITIAL_MONEY));
             }
         }
         
@@ -80,7 +83,7 @@ public class Core {
     }
     
     public static void printPlayers(){
-        for(Jugador act : playerList){
+        for(Player act : playerList){
             System.out.println(act.toString());
         }
     }

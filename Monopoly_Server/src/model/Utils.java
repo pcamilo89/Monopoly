@@ -30,6 +30,11 @@ public class Utils {
     
     public static final int GAME_INITIAL_MONEY = 1500;
     
+    public enum CardType{
+        CHANCE,
+        COMMUNITY
+    }
+    
     /**
      * Metodo que retorna un numero pseudo random desde cero hasta tope -1, es decir sin incluir el valor tope.
      * @param tope
