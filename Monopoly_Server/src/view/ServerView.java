@@ -49,6 +49,10 @@ public class ServerView extends javax.swing.JFrame {
         return jTFPort;
     }
 
+    public JButton getjBStartGame() {
+        return jBStartGame;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,6 +71,7 @@ public class ServerView extends javax.swing.JFrame {
         jPBottom = new javax.swing.JPanel();
         jPUserAdmin = new javax.swing.JPanel();
         jBAdminUsers = new javax.swing.JButton();
+        jBStartGame = new javax.swing.JButton();
         jPServerAdmin = new javax.swing.JPanel();
         jTFPort = new javax.swing.JTextField();
         jBStartServer = new javax.swing.JButton();
@@ -118,7 +123,16 @@ public class ServerView extends javax.swing.JFrame {
         jPBottom.setLayout(new java.awt.GridLayout(0, 1));
 
         jBAdminUsers.setText("jButton1");
+        jBAdminUsers.setMaximumSize(new java.awt.Dimension(80, 30));
+        jBAdminUsers.setMinimumSize(new java.awt.Dimension(80, 30));
+        jBAdminUsers.setPreferredSize(new java.awt.Dimension(80, 30));
         jPUserAdmin.add(jBAdminUsers);
+
+        jBStartGame.setText("jButton1");
+        jBStartGame.setMaximumSize(new java.awt.Dimension(120, 30));
+        jBStartGame.setMinimumSize(new java.awt.Dimension(80, 30));
+        jBStartGame.setPreferredSize(new java.awt.Dimension(120, 30));
+        jPUserAdmin.add(jBStartGame);
 
         jPBottom.add(jPUserAdmin);
 
@@ -184,6 +198,7 @@ public class ServerView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAdminUsers;
     private javax.swing.JButton jBSend;
+    private javax.swing.JButton jBStartGame;
     private javax.swing.JButton jBStartServer;
     private javax.swing.JPanel jPBottom;
     private javax.swing.JPanel jPCenter;

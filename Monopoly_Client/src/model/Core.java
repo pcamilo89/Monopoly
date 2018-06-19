@@ -25,7 +25,7 @@ public class Core {
     
     public static void stopClient(){
         if (client != null) {
-            client.sendMsg("exit");
+            
             client.closeClient();
             client = null;
             username = null;

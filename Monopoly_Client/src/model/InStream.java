@@ -45,9 +45,12 @@ public class InStream extends Thread{
             if (valuesArray.length == 1){
                 
                 if( valuesArray[0].equals("disconnect") ){
-                    //metodo para desconeccion
-                    Core.client.sendMsg("disconnect;true");
-                    Core.client.closeClient();
+                    //Hilo adicional para gestionar cierre del cliente por desconeccion del servidor.
+                    new Thread(() -> {
+                        Core.client.sendMsg("exit");
+                        Core.stopClient();
+                        ClientViewController.connectSetup();
+                    }).start();
                 }
                     
             }

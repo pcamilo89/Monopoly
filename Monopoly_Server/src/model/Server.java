@@ -74,6 +74,14 @@ public class Server extends Thread{
         }
     }
     
+    public void msgAuthUsers(String msg){
+        for (Connection conn : this.list) {
+            if (conn.getUser() != null){
+                conn.sendMsg(msg);
+            }
+        }
+    }
+        
     public boolean isUserConnected(String username){
         for (Connection conn : this.list) {
             if (conn.getUser() != null){
@@ -83,5 +91,32 @@ public class Server extends Thread{
             }
         }
         return false;
+    }
+    
+    public int countAuthUsers(){
+        int count = 0;
+        for (Connection conn : this.list) {
+            if (conn.getUser() != null){
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    public int countConnected(){
+        return this.list.size();
+    }
+    
+    public String statusString(){
+        //shows how many connected and loged in
+        return "Connected:"+countConnected()+" "+"Logged in:"+countAuthUsers();
+    }
+    
+    public void disconectNonAuth(){
+        for (Connection conn : this.list) {
+            if (conn.getUser() == null){
+                conn.sendMsg("disconnect");
+            }
+        }
     }
 }

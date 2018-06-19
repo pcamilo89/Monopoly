@@ -70,18 +70,27 @@ public class ServerViewController {
         
         serverView.getjTPTerminal().setEditable(false);
         
+        serverView.getjBStartGame().setText("Iniciar Juego");
+        serverView.getjBStartGame().addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //logica para empezar la partida
+                Core.startGame();
+            }
+        });
     }
     
     public static void sendTextButton(){
         if(!serverView.getjTFInput().getText().equals("")){
             ServerViewController.addUserText( "Server", serverView.getjTFInput().getText());
-            Core.server.msgAll("chat;Server;"+serverView.getjTFInput().getText());
+            Core.server.msgAuthUsers("chat;Server;"+serverView.getjTFInput().getText());
             serverView.getjTFInput().setText("");
         }        
     }
     
     public static void startServerButton(){
         Utils.SERVER_PORT = Integer.parseInt(serverView.getjTFPort().getText());
+        
         Core.startServer(Utils.SERVER_PORT);
     }
     
