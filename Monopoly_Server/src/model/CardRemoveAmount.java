@@ -18,7 +18,14 @@ public class CardRemoveAmount extends Card{
 
     @Override
     public void execute(Player player) {
-        player.setBalance(player.getBalance()-super.getAmount());
+        //si tiene mas de la cantidad se le descuenta
+        if (player.getBalance() > this.getAmount() ){
+            player.setBalance(player.getBalance()-super.getAmount());
+        }
+        else{
+            //caso para bacarrota
+        }
+        
     }
     
 }
