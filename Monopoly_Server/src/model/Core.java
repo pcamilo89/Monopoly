@@ -8,6 +8,8 @@ package model;
 
 import controller.ServerViewController;
 import java.util.ArrayList;
+import java.util.Random;
+import model.Utils.CardType;
 
 /**
  *
@@ -88,4 +90,41 @@ public class Core {
         }
     }
     
+    /**
+     * Metodo para obtener la lista de cartas segun su tipo
+     * @param type tipo de la carta segun CardType
+     * @return lista de cartas
+     */
+    public static ArrayList getCardList(CardType type ) {
+        if( type.equals(CardType.CHANCE) ){
+            //retorna la lista de chance
+            return chanceList;
+        }
+        else if( type.equals(CardType.COMMUNITY) ){
+            //retorna la lista de community
+            return communityList;
+        }
+        else {
+            //caso borde retorna null
+            return null;
+        }        
+    }
+    
+    /**
+     * obtener carta aleatoria de lista de cartas
+     * @param list lista de cartas para buscar
+     * @return la carta aleatoria
+     */
+    public static Card getRandomCard(ArrayList<Card> list){
+        Random randomGenerator = new Random();
+        Card card = null;
+        if (list != null) {
+            if(list.size()>0){
+                int index = randomGenerator.nextInt(list.size());
+                card = list.get(index);
+            }
+        }
+        
+        return card;
+    }
 }
