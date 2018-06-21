@@ -22,6 +22,8 @@ public class Core {
     public static ArrayList<Card> chanceList;
     public static ArrayList<Card> communityList;
     
+    public static ArrayList<Board> boardList;
+    
     public static ArrayList<Player> playerList;
     
     public static boolean juegoEnCurso = false;
@@ -29,6 +31,8 @@ public class Core {
     public static void initCore(){
         Core.userList = new UserList();
         Core.playerList = new ArrayList<>();
+        
+        //falta iniciar listas de cartas y la listatablero
     }
     
     public static void startServer(int port){

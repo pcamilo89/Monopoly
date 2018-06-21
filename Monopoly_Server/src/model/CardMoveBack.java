@@ -24,8 +24,8 @@ public class CardMoveBack extends Card{
             player.setPosition(player.getPosition() + 40);
         }
         
-        //falta implementar como continuar turno evaluando la siguiente posicion en tablero.
-        //llamar a la lista tablero en la posicion amount y su metodo excecute para siguiente paso
+        //ultimo paso, ejecutar comando de casilla destino
+        Core.boardList.get(player.getPosition()).execute(player);
     }
     
 }

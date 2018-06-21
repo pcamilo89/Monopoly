@@ -60,6 +60,8 @@ public abstract class BoardOwnable extends Board{
     public void auction(){
         if( owner != null ){
             //subasta a los otros jugadores va aqui
+            //se puede transferir hipoteca a otro jugador
+            //subasta a uno o a todos (trade o intercambio)
         }
     }
     
