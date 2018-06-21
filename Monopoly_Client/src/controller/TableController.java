@@ -34,10 +34,10 @@ public class TableController {
         Core.client.sendMsg("lanzardado");
     }
     
-    public void ResultDado(int dado1,int dado2){//mostrar dados
-        ImageIcon dado= new ImageIcon(getClass().getResource("Resources/dado"+String.valueOf(dado1)+"png"));
+    public static void ResultDado(int dado1,int dado2){//mostrar dados
+        ImageIcon dado = new ImageIcon("resources/dado"+String.valueOf(dado1)+".png");
         vista.SetDado_lbl1(dado);
-        dado= new ImageIcon(getClass().getResource("Resources/dado"+String.valueOf(dado2)+"png"));
+        dado= new ImageIcon("resources/dado"+String.valueOf(dado1)+".png");
         vista.SetDado_lbl2(dado);
     }
     
