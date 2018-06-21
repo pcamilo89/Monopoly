@@ -100,13 +100,20 @@ public class Connection extends Thread{
             
             valuesArray = text.split(";");
 
-            //si solo hay un valor y es "exit"
-            if (valuesArray.length == 1 && valuesArray[0].equals("exit")){
-                //metodo para desconeccion
-                this.disconect();                    
-            }
+            //si solo hay un valor
+            if(valuesArray.length == 1){
+                if (valuesArray[0].equals("exit")){
+
+                    //metodo para desconeccion
+                    this.disconect();                    
+                }
+                else if(valuesArray[0].equals("lanzardado")) {
+                    int dados[] = Utils.lanzarDados();
+                    sendMsg("lanzardado;"+dados[0]+";"+dados[1]);
+                }
+            }   
             // si hay mas de un valor en el arreglo
-            if (valuesArray.length > 1 ) {
+            else if (valuesArray.length > 1 ) {
 
                 //metodo de validacion de login
                 if( valuesArray[0].equals("login") ) {
