@@ -6,6 +6,8 @@
 package controller;
 import view.TableroView;
 import model.Core;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 
 /**
@@ -32,9 +34,23 @@ public class TableController {
         Core.client.sendMsg("lanzardado");
     }
     
-    public static void ResultDado(int dado1,int dado2){//mostrar dados
-
+    public void ResultDado(int dado1,int dado2){//mostrar dados
+        ImageIcon dado= new ImageIcon(getClass().getResource("Resources/dado"+String.valueOf(dado1)+"png"));
+        vista.SetDado_lbl1(dado);
+        dado= new ImageIcon(getClass().getResource("Resources/dado"+String.valueOf(dado2)+"png"));
+        vista.SetDado_lbl2(dado);
     }
+    
+    public ImageIcon createImageIcon(String path,
+                                           String description) {
+    java.net.URL imgURL = getClass().getResource(path);
+    if (imgURL != null) {
+        return new ImageIcon(imgURL, description);
+    } else {
+        System.err.println("Couldn't find file: " + path);
+        return null;
+    }
+}
     public static void MoveChess(int casilla,int player){
         if(casilla==0){
             int orig =vista.GetGotox()+30;

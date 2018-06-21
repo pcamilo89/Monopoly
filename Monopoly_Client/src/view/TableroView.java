@@ -8,6 +8,7 @@ package view;
 import controller.TableController;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -208,6 +209,12 @@ public class TableroView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void SetDado_lbl1(ImageIcon dado){
+        Dado1_lbl=new JLabel(dado);
+    }
+    public void SetDado_lbl2(ImageIcon dado){
+        Dado2_lbl=new JLabel(dado);
+    }
     public JLabel GetDado_lbl1(){
     return(Dado1_lbl);
     }
