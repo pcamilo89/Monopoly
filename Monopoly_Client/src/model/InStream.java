@@ -86,6 +86,7 @@ public class InStream extends Thread{
     }
     
     public void ResultDado(int dado1,int dado2){
+        TableController.ResultDado(dado1,dado2);
         TableController.MoveChess(dado1+dado2,1);//"1" es el jugador que en este momento está cableado con el jugador 1
     }
     

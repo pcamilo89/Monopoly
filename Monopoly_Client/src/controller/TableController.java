@@ -32,6 +32,9 @@ public class TableController {
         Core.client.sendMsg("lanzardado");
     }
     
+    public static void ResultDado(int dado1,int dado2){//mostrar dados
+
+    }
     public static void MoveChess(int casilla,int player){
         if(casilla==0){
             int orig =vista.GetGotox()+30;

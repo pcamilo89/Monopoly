@@ -7,6 +7,7 @@ package view;
 
 import controller.TableController;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 
 /**
@@ -44,6 +45,10 @@ public class TableroView extends javax.swing.JFrame {
         CGoto = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         throw_btn = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        Dado1_lbl = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        Dado2_lbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -135,21 +140,67 @@ public class TableroView extends javax.swing.JFrame {
 
         throw_btn.setText("Lanzar Dado");
 
+        Dado1_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dado1.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(Dado1_lbl)
+                .addGap(0, 17, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Dado1_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        Dado2_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dado2.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(Dado2_lbl)
+                .addGap(0, 22, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Dado2_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(120, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(throw_btn)
-                .addGap(97, 97, 97))
+                .addGap(101, 101, 101))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(238, 238, 238)
+                .addGap(141, 141, 141)
                 .addComponent(throw_btn)
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(373, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 310, 650));
@@ -157,6 +208,13 @@ public class TableroView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JLabel GetDado_lbl1(){
+    return(Dado1_lbl);
+    }
+    
+    public JLabel GetDado_lbl2(){
+    return(Dado2_lbl);
+    }
     public JButton GetThrowBtn(){
         return(throw_btn);
     }
@@ -245,6 +303,8 @@ public class TableroView extends javax.swing.JFrame {
     private javax.swing.JPanel CGO;
     private javax.swing.JPanel CGoto;
     private javax.swing.JPanel CJail;
+    private javax.swing.JLabel Dado1_lbl;
+    private javax.swing.JLabel Dado2_lbl;
     private javax.swing.JLabel P1;
     private javax.swing.JLabel P2;
     private javax.swing.JLabel P3;
@@ -253,6 +313,8 @@ public class TableroView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JButton throw_btn;
     // End of variables declaration//GEN-END:variables
 }
