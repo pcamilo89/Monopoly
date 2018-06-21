@@ -155,9 +155,7 @@ public class ClientViewController {
     }
     
     public static void logoutButton(){
-        String msg = "login;"+clientView.getjTFUsername().getText()+";"+String.valueOf(clientView.getjPFPassword().getPassword());
-        Core.stopClient();
-        connectSetup();
+
     }
     
     public static void connectButton(){
@@ -165,7 +163,11 @@ public class ClientViewController {
     }
     
     public static void disconnectButton(){
-        Core.stopClient();
+        if(Core.client != null){
+            Core.client.sendMsg("exit");
+            Core.stopClient();
+        }
+        
         connectSetup();
     }
     
