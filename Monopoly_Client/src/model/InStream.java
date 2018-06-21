@@ -2,6 +2,7 @@ package model;
 
 import controller.ChatPanelController;
 import controller.ClientViewController;
+import controller.TableController;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -66,6 +67,9 @@ public class InStream extends Thread{
                 else if ( valuesArray[0].equals("exit") ) {
                     receivedMsg(Utils.CLIENT_DISCONNECT_MSG);
                 }
+                else if ( valuesArray[0].equals("lanzardado")){
+                    ResultDado(Integer.parseInt(valuesArray[1]),Integer.parseInt(valuesArray[2]));//Recibo el lanzamiento del dado para mostrarlo a la vista solamente
+                }
 
                 //si pasa el proceso de login
                 if(Core.username != null){
@@ -79,6 +83,10 @@ public class InStream extends Thread{
 
             }
         }
+    }
+    
+    public void ResultDado(int dado1,int dado2){
+        TableController.MoveChess(dado1+dado2,1);//"1" es el jugador que en este momento está cableado con el jugador 1
     }
     
     public void connect(String values[]){
