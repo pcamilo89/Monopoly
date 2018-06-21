@@ -56,7 +56,8 @@ public class Connection extends Thread{
         
         String line = null;
         //print number of conected users
-        ServerViewController.addServerText(Utils.SERVER_CONECTED_MSG+Core.server.list.size());        
+        ServerViewController.addServerText(Core.server.statusString());        
+        
         //send success msg to client
         sendMsg("msg"+";"+Utils.SERVER_CONECTION_SUCCESS_MSG);
         sendMsg("connect;true");     
@@ -71,7 +72,7 @@ public class Connection extends Thread{
         }
         
         //print number of conected
-        ServerViewController.addServerText(Utils.SERVER_CONECTED_MSG+Core.server.list.size());
+        ServerViewController.addServerText(Core.server.statusString());
     }
     
     public void closeConnection(){
@@ -142,6 +143,7 @@ public class Connection extends Thread{
             //en caso que se encuentre en archivo
             if( user != null ) {
                 sendMsg("login;true;");
+                ServerViewController.addServerText(Core.server.statusString());
             }
             else{
                 sendMsg("login;false;"+Utils.ERR_USER_BAD_LOGIN_INFO);
@@ -157,7 +159,7 @@ public class Connection extends Thread{
     
     public void chat(String username, String text){
         //send msg to all conected
-        Core.server.msgAll( "chat"+";"+username+";"+text );
+        Core.server.msgAuthUsers("chat"+";"+username+";"+text );
 
         //print user received msg on console
         ServerViewController.addUserText(username, text);

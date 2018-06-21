@@ -33,7 +33,7 @@ public class MainServer {
     public static void main(String[] args){
         setLookAndFeel();
         
-        Core.userList = new UserList();
+        Core.initCore();
         
         serverView = new ServerView();
         serverView.setVisible(true);        
