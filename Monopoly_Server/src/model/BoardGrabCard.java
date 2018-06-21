@@ -13,7 +13,7 @@ import model.Utils.CardType;
  * @author Camilo
  */
 public class BoardGrabCard extends Board{
-    CardType type;
+    private CardType type;
 
     public BoardGrabCard(CardType type) {
         //nombre de la casilla

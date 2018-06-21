@@ -21,7 +21,7 @@ public class CardMoveBack extends Card{
         player.setPosition(player.getPosition() - this.getAmount());
         
         if(player.getPosition() < 0 ){
-            player.setPosition(player.getPosition() + 39);
+            player.setPosition(player.getPosition() + 40);
         }
         
         //falta implementar como continuar turno evaluando la siguiente posicion en tablero.
