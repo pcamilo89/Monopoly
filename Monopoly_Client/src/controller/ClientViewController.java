@@ -171,8 +171,7 @@ public class ClientViewController {
         connectSetup();
     }
     
-    public static void loginSuccess(){
-        Core.username = clientView.getjTFUsername().getText();
+    public static void loginSuccess(){        
         clearUserFields();
         logoutSetup();
     }

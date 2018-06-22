@@ -75,7 +75,7 @@ public class InStream extends Thread{
                 }
 
                 //si pasa el proceso de login
-                if(Core.username != null){
+                if(Core.jugadorLocal != null){
 
                     //recepcion de mensajes chat
                     if ( valuesArray[0].equals("chat") ) {
@@ -103,6 +103,8 @@ public class InStream extends Thread{
     public void login(String values[]){
         if ( values[1].equals("true") ){
             receivedMsg(Utils.CLIENT_LOGIN_SUCCESS);
+            Core.jugadorLocal = new Jugador(values[2], values[3], values[4]);
+            System.out.println(Core.jugadorLocal);
             ClientViewController.loginSuccess();
         }
         else {

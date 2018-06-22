@@ -54,7 +54,7 @@ public class TableroViewController {
         } catch (InterruptedException ex) {
             Logger.getLogger(TableroViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("casilla:"+casilla);
+
         int orig = 0;
         int axis = 0;
         //si la casilla es GO
@@ -128,13 +128,13 @@ public class TableroViewController {
         }
         
         if(player == 1)
-            vista.SetP1(orig,axis);       
+            vista.SetP1Location(orig,axis);       
         else if(player == 2)
-            vista.SetP2(orig+20,axis);
+            vista.SetP2Location(orig+20,axis);
         else if(player == 3)
-            vista.SetP3(orig,axis+30);
+            vista.SetP3Location(orig,axis+30);
         else if(player == 4)
-            vista.SetP4(orig+30,axis+20);
+            vista.SetP4Location(orig+30,axis+20);
 
     }
 

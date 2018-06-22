@@ -124,8 +124,9 @@ public class Connection extends Thread{
                 if(user != null){
 
                     //envio de mensajes chat
-                    if ( valuesArray[0].equals("chat") ) {                            
-                        this.chat(user.getUsername(), valuesArray[1]);
+                    if ( valuesArray[0].equals("chat") ) {
+                        String name = user.getName()+" "+user.getLastname();
+                        this.chat(name, valuesArray[1]);
                     }
 
                 }
@@ -149,7 +150,7 @@ public class Connection extends Thread{
             user = UserJson.loginUser(tempUsername, tempPassword);
             //en caso que se encuentre en archivo
             if( user != null ) {
-                sendMsg("login;true;");
+                sendMsg("login;true;"+user.getUsername()+";"+user.getName()+";"+user.getLastname()+";");
                 ServerViewController.addServerText(Core.server.statusString());
             }
             else{

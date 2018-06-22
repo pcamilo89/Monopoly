@@ -51,7 +51,7 @@ public class TableroView extends javax.swing.JFrame {
         Label_Dado1 = new javax.swing.JLabel();
         Label_Dado2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1074, 700));
 
         Panel_Center.setPreferredSize(new java.awt.Dimension(674, 700));
@@ -187,14 +187,6 @@ public class TableroView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void SetDado1(ImageIcon dado){
-        Label_Dado1=new JLabel(dado);
-    }
-    
-    public void SetDado2(ImageIcon dado){
-        Label_Dado2=new JLabel(dado);
-    }
-    
     public JLabel GetDado1(){
         return(Label_Dado1);
     }
@@ -212,22 +204,37 @@ public class TableroView extends javax.swing.JFrame {
         return Label_P1;
     }
     
-    public void SetP1(int x,int y)
+    public JLabel GetP2()
+    {
+        return Label_P2;
+    }
+    
+    public JLabel GetP3()
+    {
+        return Label_P3;
+    }
+    
+    public JLabel GetP4()
+    {
+        return Label_P4;
+    }
+    
+    public void SetP1Location(int x,int y)
     {
         Label_P1.setLocation(x,y);
     }
     
-    public void SetP2(int x,int y)
+    public void SetP2Location(int x,int y)
     {
         Label_P2.setLocation(x,y);
     }
     
-    public void SetP3(int x,int y)
+    public void SetP3Location(int x,int y)
     {
         Label_P3.setLocation(x,y);
     }
     
-    public void SetP4(int x,int y)
+    public void SetP4Location(int x,int y)
     {
         Label_P4.setLocation(x,y);
     }    

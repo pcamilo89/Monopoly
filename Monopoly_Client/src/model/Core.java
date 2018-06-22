@@ -13,7 +13,8 @@ package model;
 public class Core {
     public static Client client;
     
-    public static String username;
+    public static Jugador jugadorLocal;
+    public static String jugadorActual;
     
     public static void startClient(String ip,int port){
         
@@ -28,7 +29,7 @@ public class Core {
             
             client.closeClient();
             client = null;
-            username = null;
+            jugadorLocal = null;
         }
     }
 }
