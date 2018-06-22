@@ -57,9 +57,15 @@ public class Server extends Thread{
     public void Close(){
         try {
             this.working = false;
+            this.disconectAll();
+            while(this.list.size() > 0){
+                Thread.sleep(100);
+            }
             this.serverSocket.close();
             
         } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -93,6 +99,17 @@ public class Server extends Thread{
         return false;
     }
     
+    public Connection getConnByUsername(String username){
+        for (Connection conn : this.list) {
+            if (conn.getUser() != null){
+                if( conn.getUser().getUsername().equals(username) ) {
+                    return conn;
+                }
+            }
+        }
+        return null;
+    }
+    
     public int countAuthUsers(){
         int count = 0;
         for (Connection conn : this.list) {
@@ -112,10 +129,28 @@ public class Server extends Thread{
         return "Connected:"+countConnected()+" "+"Logged in:"+countAuthUsers();
     }
     
+    public void disconectAll(){
+        for (Connection conn : this.list) {
+            conn.sendMsg("disconnect");
+        }
+    }
+    
     public void disconectNonAuth(){
         for (Connection conn : this.list) {
             if (conn.getUser() == null){
                 conn.sendMsg("disconnect");
+            }
+        }
+    }
+    
+    public void disconectExcess(){
+        if( countAuthUsers() > 4 ){
+            try {
+                this.list.get(4).sendMsg("disconnect");
+                Thread.sleep(1000);
+                disconectExcess();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

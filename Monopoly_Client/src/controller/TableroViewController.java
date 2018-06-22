@@ -5,9 +5,13 @@
  */
 package controller;
 import java.awt.Dimension;
-import java.awt.Insets;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import model.Core;
 import view.TableroView;
 
@@ -26,21 +30,59 @@ public class TableroViewController {
     public static void setElm()
     {
         vista.setMinimumSize(new Dimension(700+400, 700));
-        //Insets inset = vista.getPanel_Tablero().getInsets();
-        //vista.getPanel_Tablero().setBounds(inset.left, inset.top, 650, 650);
+        vista.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         
+        WindowListener exitListener = new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                
+                int confirm = JOptionPane.showOptionDialog(
+                    null, "Are You Sure to Close Application?", 
+                    "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, null, null, null);
+                if (confirm == 0) {
+                    System.out.println("Cerrando Tablero");
+                    if(Core.client != null){
+                        Core.client.sendMsg("exit");
+                        Core.stopClient();
+                    }
+                    vista.setVisible(false);
+                    vista.dispose();
+                }
+                
+            }
+        };
+        vista.addWindowListener(exitListener);
+        
+        vista.GetButton_Throw().setText("Lanzar Dados");
         vista.GetButton_Throw().addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TableroViewController.Throw_btn();
+                TableroViewController.Button_Throw();
             }
         });
+        Button_ThrowDisable();
     }
-    public static void Throw_btn(){
+    
+    public static void closeWindow(){
+        vista.setVisible(false);
+        vista.dispose();
+    }
+    
+    public static void Button_Throw(){
         if (Core.client != null){
             Core.client.sendMsg("lanzardado");
         }            
         
+    }
+    
+    public static void Button_ThrowEnable(){
+        vista.GetButton_Throw().setEnabled(true);
+    }
+    
+    public static void Button_ThrowDisable(){
+        vista.GetButton_Throw().setEnabled(false);
     }
     
     public static void ResultDado(int dado1,int dado2){//mostrar dados

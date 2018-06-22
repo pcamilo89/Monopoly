@@ -11,6 +11,11 @@ import model.Utils;
 import view.ChatPanel;
 import view.ClientView;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,6 +39,31 @@ public class ClientViewController {
         clientView.getjBLogin().setText("Login");
         clientView.getjBLogout().setText("Logout");
         clearUserFields();
+        
+        clientView.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
+        WindowListener exitListener = new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                
+                int confirm = JOptionPane.showOptionDialog(
+                    null, "Are You Sure to Close Application?", 
+                    "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, null, null, null);
+                if (confirm == 0) {
+                    System.out.println("Cerrando ClientView");
+                    if(Core.client != null){
+                        Core.client.sendMsg("exit");
+                        Core.stopClient();
+                    }
+                    clientView.setVisible(false);
+                    clientView.dispose();
+                }
+                
+            }
+        };
+        clientView.addWindowListener(exitListener);
         
         clientView.getjBLogin().addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -75,6 +105,11 @@ public class ClientViewController {
         clearInfoLabel();
         connectSetup();
         clientView.getjPChat().add(new ChatPanel());
+    }
+    
+    public static void closeWindow(){
+        clientView.setVisible(false);
+        clientView.dispose();
     }
     
     public static void clearUserFields(){

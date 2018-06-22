@@ -28,11 +28,14 @@ public class Core {
     
     public static boolean juegoEnCurso = false;
     
+    public static String playerActual =  null;
+    
     public static void initCore(){
         Core.userList = new UserList();
         Core.playerList = new ArrayList<>();
+        Core.boardList =  new ArrayList<>();
         
-        //falta iniciar listas de cartas y la listatablero
+        //falta llenar listas de cartas y la listatablero
     }
     
     public static void startServer(int port){
@@ -41,7 +44,10 @@ public class Core {
         if( server == null ){            
             server = new Server(port);
             server.start();
-            //ServerViewController.addServerText(Utils.SERVER_STARTUP_MSG);
+            
+            //en caso que se quiera iniciar partidas consecutivas
+            juegoEnCurso = false;
+            ServerViewController.startGameButtonEnable();
         }else{
             server.Close();
             server = null;
@@ -53,8 +59,8 @@ public class Core {
     public static void startGame(){
         if(!juegoEnCurso){
             if(server.countAuthUsers() >= 2 && server.countAuthUsers() <= 4){
+                //si hay entre 2 y 4 jugadores logueados
                 ServerViewController.addServerText(Utils.SERVER_GAME_ENOUGH);
-
 
                 initPlayers();
                 printPlayers();
@@ -62,13 +68,42 @@ public class Core {
                 //se desconectan los usuarios que no iniciaron sesion.
                 server.disconectNonAuth();
 
-                //falta desabilitar el boton de iniciar partida
-                
+                //desabilitar el boton de iniciar partida
+                ServerViewController.startGameButtonDisable();
                 //enviar mensaje a clientes en lista jugador para habilitar interfaz de juego
+                int cant = Core.playerList.size();
+                
+                String msg = "startgame";
+                
+                //se envian los username para listas locales
+                for(Player act : Core.playerList){
+                    msg += ";"+act.getUser().getUsername();
+                }
+                
+                //si no son 4 se envian null por jugadores faltantes
+                if (cant < 4 ){
+                    cant = 4 - cant;
+                    for(int i=0;i<cant;i++){
+                        msg += ";null";
+                    }
+                }
+                
+                Core.msgAllPlayers(msg);
+                
+                
                 
                 juegoEnCurso = true;
             }
+            else if(server.countAuthUsers() > 4){
+                //si hay mas de 4 usuarios logueados
+                //se deberia desconectar el exceso
+                server.disconectNonAuth();
+                server.disconectExcess();
+                //y volver a llamar a startgame
+                startGame();
+            }
             else{
+                //si hay menos de dos usuarios logueados
                 ServerViewController.addServerText(Utils.SERVER_GAME_NOT_ENOUGH);
             }
         }
@@ -84,13 +119,30 @@ public class Core {
                 playerList.add(new Player(conn.getUser(), Utils.GAME_INITIAL_MONEY));
             }
         }
-        
-        
     }
     
     public static void printPlayers(){
         for(Player act : playerList){
             System.out.println(act.toString());
+        }
+    }
+    
+    public static void msgAllPlayers(String msg){
+        for(Player act : playerList){
+            String username = act.getUser().getUsername();
+            
+            Connection conn = server.getConnByUsername(username);
+            conn.sendMsg(msg);
+        }
+    }
+    
+    public static void msgPlayer(String username, String msg){
+        for(Player act : playerList){
+            if(act.getUser().getUsername().equals(username)) {
+                Connection conn = server.getConnByUsername(username);
+                conn.sendMsg(msg);
+            }
+            break;
         }
     }
     

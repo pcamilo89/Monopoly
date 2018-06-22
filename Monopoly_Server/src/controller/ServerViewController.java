@@ -78,6 +78,15 @@ public class ServerViewController {
                 Core.startGame();
             }
         });
+        startGameButtonDisable();
+    }
+    
+    public static void startGameButtonEnable(){
+        serverView.getjBStartGame().setEnabled(true);
+    }
+    
+    public static void startGameButtonDisable(){
+        serverView.getjBStartGame().setEnabled(false);
     }
     
     public static void sendTextButton(){

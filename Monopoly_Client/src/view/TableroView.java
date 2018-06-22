@@ -8,7 +8,6 @@ package view;
 import controller.TableroViewController;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 
@@ -52,7 +51,6 @@ public class TableroView extends javax.swing.JFrame {
         Label_Dado2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1074, 700));
 
         Panel_Center.setPreferredSize(new java.awt.Dimension(674, 700));
 
@@ -151,7 +149,7 @@ public class TableroView extends javax.swing.JFrame {
 
         Panel_Left.setPreferredSize(new java.awt.Dimension(400, 650));
 
-        Button_Throw.setText("Lanzar Dado");
+        Button_Throw.setText("texto aqui");
 
         Label_Dado1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dado1.png"))); // NOI18N
         Panel_Dados.add(Label_Dado1);
@@ -164,7 +162,7 @@ public class TableroView extends javax.swing.JFrame {
         Panel_LeftLayout.setHorizontalGroup(
             Panel_LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_LeftLayout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
+                .addContainerGap(218, Short.MAX_VALUE)
                 .addComponent(Button_Throw)
                 .addGap(101, 101, 101))
             .addGroup(Panel_LeftLayout.createSequentialGroup()

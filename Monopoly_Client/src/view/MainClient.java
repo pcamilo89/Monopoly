@@ -33,7 +33,7 @@ public class MainClient {
         ClientView clientView = new ClientView();
         clientView.setVisible(true);
         
-        TableroView tablero = new TableroView();
-        tablero.setVisible(true);
+        //TableroView tablero = new TableroView();
+        //tablero.setVisible(true);
     }
 }

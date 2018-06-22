@@ -6,6 +6,7 @@ import controller.TableroViewController;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
+import view.TableroView;
 
 public class InStream extends Thread{
     private InputStream in;
@@ -69,10 +70,7 @@ public class InStream extends Thread{
                 }                
                 else if ( valuesArray[0].equals("exit") ) {
                     receivedMsg(Utils.CLIENT_DISCONNECT_MSG);
-                }
-                else if ( valuesArray[0].equals("lanzardado")){
-                    ResultDado(Integer.parseInt(valuesArray[1]),Integer.parseInt(valuesArray[2]));//Recibo el lanzamiento del dado para mostrarlo a la vista solamente
-                }
+                }                
 
                 //si pasa el proceso de login
                 if(Core.jugadorLocal != null){
@@ -81,6 +79,14 @@ public class InStream extends Thread{
                     if ( valuesArray[0].equals("chat") ) {
                         chatMsg(valuesArray[1], valuesArray[2]);
                     }
+                    //instrucciones para la partida
+                    else if ( valuesArray[0].equals("startgame")){
+                        //se inicia la partida con esta instruccion
+                        startGame(valuesArray);
+                    }                    
+                    else if ( valuesArray[0].equals("lanzardado")){
+                        resultDado(Integer.parseInt(valuesArray[1]),Integer.parseInt(valuesArray[2]));//Recibo el lanzamiento del dado para mostrarlo a la vista solamente
+                    }
 
                 }
 
@@ -88,10 +94,33 @@ public class InStream extends Thread{
         }
     }
     
-    public void ResultDado(int dado1,int dado2){
+    public void resultDado(int dado1,int dado2){
         int sum = dado1 + dado2;
         TableroViewController.ResultDado(dado1,dado2);
+        //temporal - esto se movera a actualizar tablero que sera siempre que se recibe algo durante la partida
         TableroViewController.MoveChess(sum,1);//"1" es el jugador que en este momento está cableado con el jugador 1
+    }
+    
+    public void startGame(String values[]){
+        Core.initPartida();
+        //se cargan los jugadores en Core
+        for(String act: values){
+            if( !act.equals("null")  && !act.equals("startgame" )){
+                if( act.equals( Core.jugadorLocal.getUsername() ) ){
+                    Core.listaJugadores.add( Core.jugadorLocal );
+                }
+                else {
+                    Core.listaJugadores.add( new Player(act) );
+                }
+            }
+        }
+        
+        System.out.println("Partida Iniciada:"+Core.listaJugadores.size());
+        
+        ClientViewController.closeWindow();
+        
+        TableroView tablero = new TableroView();
+        tablero.setVisible(true);
     }
     
     public void connect(String values[]){
@@ -103,7 +132,7 @@ public class InStream extends Thread{
     public void login(String values[]){
         if ( values[1].equals("true") ){
             receivedMsg(Utils.CLIENT_LOGIN_SUCCESS);
-            Core.jugadorLocal = new Jugador(values[2], values[3], values[4]);
+            Core.jugadorLocal = new Player(values[2], values[3], values[4]);
             System.out.println(Core.jugadorLocal);
             ClientViewController.loginSuccess();
         }

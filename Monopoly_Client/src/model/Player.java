@@ -10,7 +10,7 @@ package model;
  *
  * @author Camilo
  */
-public class Jugador {
+public class Player {
     private String username;
     private String name;
     private String lastname;
@@ -19,7 +19,7 @@ public class Jugador {
     private boolean inJail;
     private boolean activo;
     
-    public Jugador(){
+    public Player(){
         this.username = "";
         this.name = "";
         this.lastname = "";
@@ -29,7 +29,7 @@ public class Jugador {
         this.activo =  false;        
     }
     
-    public Jugador(String username){
+    public Player(String username){
         this.username = username;
         this.name = "";
         this.lastname = "";
@@ -39,7 +39,7 @@ public class Jugador {
         this.activo =  false;
     }
     
-    public Jugador(String username, String name, String lastname){
+    public Player(String username, String name, String lastname){
         this.username = username;
         this.name = name;
         this.lastname = lastname;

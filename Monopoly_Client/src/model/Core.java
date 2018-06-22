@@ -6,6 +6,8 @@
 
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Camilo
@@ -13,7 +15,9 @@ package model;
 public class Core {
     public static Client client;
     
-    public static Jugador jugadorLocal;
+    public static ArrayList<Player> listaJugadores;
+    
+    public static Player jugadorLocal;
     public static String jugadorActual;
     
     public static void startClient(String ip,int port){
@@ -21,7 +25,8 @@ public class Core {
         if( client == null ){            
             client = new Client(ip, port);
             client.start();
-        }        
+        }
+        
     }
     
     public static void stopClient(){
@@ -31,5 +36,9 @@ public class Core {
             client = null;
             jugadorLocal = null;
         }
+    }
+    
+    public static void initPartida(){
+        listaJugadores = new ArrayList<>();
     }
 }
