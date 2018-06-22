@@ -5,10 +5,11 @@
  */
 package view;
 
-import controller.TableController;
+import controller.TableroViewController;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 
 /**
@@ -21,7 +22,7 @@ public class TableroView extends javax.swing.JFrame {
      */
     public TableroView() {
         initComponents();
-        TableController.load(this);
+        TableroViewController.load(this);
     }
 
     /**
@@ -33,243 +34,240 @@ public class TableroView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PanelTab = new javax.swing.JPanel();
-        P1 = new javax.swing.JLabel();
-        P2 = new javax.swing.JLabel();
-        P3 = new javax.swing.JLabel();
-        P4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        CGO = new javax.swing.JPanel();
-        CJail = new javax.swing.JPanel();
-        CFree = new javax.swing.JPanel();
-        CGoto = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        throw_btn = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        Dado1_lbl = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        Dado2_lbl = new javax.swing.JLabel();
+        Panel_Center = new javax.swing.JPanel();
+        Panel_Tablero = new javax.swing.JPanel();
+        Label_P1 = new javax.swing.JLabel();
+        Label_P2 = new javax.swing.JLabel();
+        Label_P3 = new javax.swing.JLabel();
+        Label_P4 = new javax.swing.JLabel();
+        Label_Tablero = new javax.swing.JLabel();
+        Label_CGO = new javax.swing.JPanel();
+        Label_CJail = new javax.swing.JPanel();
+        Label_CFree = new javax.swing.JPanel();
+        Label_CGoto = new javax.swing.JPanel();
+        Panel_Left = new javax.swing.JPanel();
+        Button_Throw = new javax.swing.JButton();
+        Panel_Dados = new javax.swing.JPanel();
+        Label_Dado1 = new javax.swing.JLabel();
+        Label_Dado2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setPreferredSize(new java.awt.Dimension(1074, 700));
 
-        PanelTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Panel_Center.setPreferredSize(new java.awt.Dimension(674, 700));
 
-        P1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/carr.png"))); // NOI18N
-        PanelTab.add(P1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, 40, 30));
+        Panel_Tablero.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        Panel_Tablero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        P2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
-        PanelTab.add(P2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 40, 30));
+        Label_P1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/carr.png"))); // NOI18N
+        Panel_Tablero.add(Label_P1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, 40, 30));
 
-        P3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dog.png"))); // NOI18N
-        PanelTab.add(P3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, 40, 30));
+        Label_P2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
+        Panel_Tablero.add(Label_P2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 40, 30));
 
-        P4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dedal.png"))); // NOI18N
-        PanelTab.add(P4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 30, -1));
+        Label_P3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dog.png"))); // NOI18N
+        Panel_Tablero.add(Label_P3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, 40, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/tabmonpoly.png"))); // NOI18N
-        PanelTab.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        Label_P4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dedal.png"))); // NOI18N
+        Panel_Tablero.add(Label_P4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 30, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        Label_Tablero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/tabmonpoly.png"))); // NOI18N
+        Panel_Tablero.add(Label_Tablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        javax.swing.GroupLayout Label_CGOLayout = new javax.swing.GroupLayout(Label_CGO);
+        Label_CGO.setLayout(Label_CGOLayout);
+        Label_CGOLayout.setHorizontalGroup(
+            Label_CGOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        PanelTab.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 90, 50));
-
-        javax.swing.GroupLayout CGOLayout = new javax.swing.GroupLayout(CGO);
-        CGO.setLayout(CGOLayout);
-        CGOLayout.setHorizontalGroup(
-            CGOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        CGOLayout.setVerticalGroup(
-            CGOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        Label_CGOLayout.setVerticalGroup(
+            Label_CGOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        PanelTab.add(CGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 90, 90));
+        Panel_Tablero.add(Label_CGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 90, 90));
 
-        javax.swing.GroupLayout CJailLayout = new javax.swing.GroupLayout(CJail);
-        CJail.setLayout(CJailLayout);
-        CJailLayout.setHorizontalGroup(
-            CJailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Label_CJailLayout = new javax.swing.GroupLayout(Label_CJail);
+        Label_CJail.setLayout(Label_CJailLayout);
+        Label_CJailLayout.setHorizontalGroup(
+            Label_CJailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        CJailLayout.setVerticalGroup(
-            CJailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        PanelTab.add(CJail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 560, 90, 90));
-
-        javax.swing.GroupLayout CFreeLayout = new javax.swing.GroupLayout(CFree);
-        CFree.setLayout(CFreeLayout);
-        CFreeLayout.setHorizontalGroup(
-            CFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        CFreeLayout.setVerticalGroup(
-            CFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        Label_CJailLayout.setVerticalGroup(
+            Label_CJailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        PanelTab.add(CFree, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 90, 90));
+        Panel_Tablero.add(Label_CJail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 560, 90, 90));
 
-        javax.swing.GroupLayout CGotoLayout = new javax.swing.GroupLayout(CGoto);
-        CGoto.setLayout(CGotoLayout);
-        CGotoLayout.setHorizontalGroup(
-            CGotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Label_CFreeLayout = new javax.swing.GroupLayout(Label_CFree);
+        Label_CFree.setLayout(Label_CFreeLayout);
+        Label_CFreeLayout.setHorizontalGroup(
+            Label_CFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        Label_CFreeLayout.setVerticalGroup(
+            Label_CFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        Panel_Tablero.add(Label_CFree, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 90, 90));
+
+        javax.swing.GroupLayout Label_CGotoLayout = new javax.swing.GroupLayout(Label_CGoto);
+        Label_CGoto.setLayout(Label_CGotoLayout);
+        Label_CGotoLayout.setHorizontalGroup(
+            Label_CGotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 90, Short.MAX_VALUE)
         );
-        CGotoLayout.setVerticalGroup(
-            CGotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        Label_CGotoLayout.setVerticalGroup(
+            Label_CGotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 90, Short.MAX_VALUE)
         );
 
-        PanelTab.add(CGoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 90));
+        Panel_Tablero.add(Label_CGoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 90));
 
-        getContentPane().add(PanelTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 650));
-
-        throw_btn.setText("Lanzar Dado");
-
-        Dado1_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dado1.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(Dado1_lbl)
-                .addGap(0, 17, Short.MAX_VALUE))
+        javax.swing.GroupLayout Panel_CenterLayout = new javax.swing.GroupLayout(Panel_Center);
+        Panel_Center.setLayout(Panel_CenterLayout);
+        Panel_CenterLayout.setHorizontalGroup(
+            Panel_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 674, Short.MAX_VALUE)
+            .addGroup(Panel_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_CenterLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Panel_Tablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Dado1_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        Dado2_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dado2.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(Dado2_lbl)
-                .addGap(0, 22, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Dado2_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+        Panel_CenterLayout.setVerticalGroup(
+            Panel_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 938, Short.MAX_VALUE)
+            .addGroup(Panel_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_CenterLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Panel_Tablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(throw_btn)
+        getContentPane().add(Panel_Center, java.awt.BorderLayout.CENTER);
+
+        Panel_Left.setPreferredSize(new java.awt.Dimension(400, 650));
+
+        Button_Throw.setText("Lanzar Dado");
+
+        Label_Dado1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dado1.png"))); // NOI18N
+        Panel_Dados.add(Label_Dado1);
+
+        Label_Dado2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dado2.png"))); // NOI18N
+        Panel_Dados.add(Label_Dado2);
+
+        javax.swing.GroupLayout Panel_LeftLayout = new javax.swing.GroupLayout(Panel_Left);
+        Panel_Left.setLayout(Panel_LeftLayout);
+        Panel_LeftLayout.setHorizontalGroup(
+            Panel_LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_LeftLayout.createSequentialGroup()
+                .addContainerGap(206, Short.MAX_VALUE)
+                .addComponent(Button_Throw)
                 .addGap(101, 101, 101))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(Panel_LeftLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addComponent(Panel_Dados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        Panel_LeftLayout.setVerticalGroup(
+            Panel_LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_LeftLayout.createSequentialGroup()
                 .addGap(141, 141, 141)
-                .addComponent(throw_btn)
+                .addComponent(Button_Throw)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(373, Short.MAX_VALUE))
+                .addComponent(Panel_Dados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(673, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 310, 650));
+        getContentPane().add(Panel_Left, java.awt.BorderLayout.EAST);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void SetDado_lbl1(ImageIcon dado){
-        Dado1_lbl=new JLabel(dado);
-    }
-    public void SetDado_lbl2(ImageIcon dado){
-        Dado2_lbl=new JLabel(dado);
-    }
-    public JLabel GetDado_lbl1(){
-    return(Dado1_lbl);
+    public void SetDado1(ImageIcon dado){
+        Label_Dado1=new JLabel(dado);
     }
     
-    public JLabel GetDado_lbl2(){
-    return(Dado2_lbl);
+    public void SetDado2(ImageIcon dado){
+        Label_Dado2=new JLabel(dado);
     }
-    public JButton GetThrowBtn(){
-        return(throw_btn);
+    
+    public JLabel GetDado1(){
+        return(Label_Dado1);
     }
+    
+    public JLabel GetDado2(){
+        return(Label_Dado2);
+    }
+    
+    public JButton GetButton_Throw(){
+        return(Button_Throw);
+    }
+    
+    public JLabel GetP1()
+    {
+        return Label_P1;
+    }
+    
     public void SetP1(int x,int y)
     {
-        P1.setLocation(x,y);
+        Label_P1.setLocation(x,y);
     }
     
     public void SetP2(int x,int y)
     {
-        P2.setLocation(x,y);
+        Label_P2.setLocation(x,y);
     }
+    
     public void SetP3(int x,int y)
     {
-        P3.setLocation(x,y);
+        Label_P3.setLocation(x,y);
     }
     
     public void SetP4(int x,int y)
     {
-        P4.setLocation(x,y);
-    }
-    
+        Label_P4.setLocation(x,y);
+    }    
     
     public int GetGox(){
-        return(CGO.getX());
+        return(Label_CGO.getX());
     }
+    
     public int GetGoy()
     {
-        return(CGO.getY());
+        return(Label_CGO.getY());
     }
+    
     public int GetFreex(){
-        return(CFree.getX());
+        return(Label_CFree.getX());
     }
     public int GetFreey(){
-        return(CFree.getY());
+        return(Label_CFree.getY());
     }
+    
     public int GetGotox(){
-        return(CGoto.getX());
+        return(Label_CGoto.getX());
     }
+    
     public int GetGotoy(){
-        return(CGoto.getY());
+        return(Label_CGoto.getY());
     }
+    
     public int GetJailx(){
-        return(CJail.getX());
+        return(Label_CJail.getX());
     }
+    
     public int GetJaily(){
-        return(CJail.getY());
+        return(Label_CJail.getY());
     }
+
+    public JPanel getPanel_Tablero() {
+        return Panel_Tablero;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -281,7 +279,7 @@ public class TableroView extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -306,22 +304,21 @@ public class TableroView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel CFree;
-    private javax.swing.JPanel CGO;
-    private javax.swing.JPanel CGoto;
-    private javax.swing.JPanel CJail;
-    private javax.swing.JLabel Dado1_lbl;
-    private javax.swing.JLabel Dado2_lbl;
-    private javax.swing.JLabel P1;
-    private javax.swing.JLabel P2;
-    private javax.swing.JLabel P3;
-    private javax.swing.JLabel P4;
-    private javax.swing.JPanel PanelTab;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JButton throw_btn;
+    private javax.swing.JButton Button_Throw;
+    private javax.swing.JPanel Label_CFree;
+    private javax.swing.JPanel Label_CGO;
+    private javax.swing.JPanel Label_CGoto;
+    private javax.swing.JPanel Label_CJail;
+    private javax.swing.JLabel Label_Dado1;
+    private javax.swing.JLabel Label_Dado2;
+    private javax.swing.JLabel Label_P1;
+    private javax.swing.JLabel Label_P2;
+    private javax.swing.JLabel Label_P3;
+    private javax.swing.JLabel Label_P4;
+    private javax.swing.JLabel Label_Tablero;
+    private javax.swing.JPanel Panel_Center;
+    private javax.swing.JPanel Panel_Dados;
+    private javax.swing.JPanel Panel_Left;
+    private javax.swing.JPanel Panel_Tablero;
     // End of variables declaration//GEN-END:variables
 }

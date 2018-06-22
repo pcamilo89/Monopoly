@@ -2,7 +2,7 @@ package model;
 
 import controller.ChatPanelController;
 import controller.ClientViewController;
-import controller.TableController;
+import controller.TableroViewController;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -89,8 +89,9 @@ public class InStream extends Thread{
     }
     
     public void ResultDado(int dado1,int dado2){
-        TableController.ResultDado(dado1,dado2);
-        TableController.MoveChess(dado1+dado2,1);//"1" es el jugador que en este momento está cableado con el jugador 1
+        int sum = dado1 + dado2;
+        TableroViewController.ResultDado(dado1,dado2);
+        TableroViewController.MoveChess(sum,1);//"1" es el jugador que en este momento está cableado con el jugador 1
     }
     
     public void connect(String values[]){
