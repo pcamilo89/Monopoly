@@ -75,7 +75,7 @@ public class ServerViewController {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //logica para empezar la partida
-                Core.startGame();
+                Core.checkStartGameConditions();
             }
         });
         startGameButtonDisable();

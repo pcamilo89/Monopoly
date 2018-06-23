@@ -70,4 +70,13 @@ public class Core {
         }
         return result;
     }
+    
+    public static Player getPlayer(String username){
+        for(Player act : listaJugadores){
+            if(act.getUsername().equals(username)){
+                return act;
+            }
+        }
+        return null;
+    }
 }

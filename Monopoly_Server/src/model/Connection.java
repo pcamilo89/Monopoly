@@ -108,8 +108,7 @@ public class Connection extends Thread{
                     this.disconect();                    
                 }
                 else if(valuesArray[0].equals("lanzardado")) {
-                    int dados[] = Utils.lanzarDados();
-                    sendMsg("lanzardado;"+dados[0]+";"+dados[1]);
+                    lanzarDados();
                 }
             }   
             // si hay mas de un valor en el arreglo
@@ -134,6 +133,10 @@ public class Connection extends Thread{
             }
                 
             }
+    }
+    
+    public void lanzarDados(){
+        Core.lanzarDados();
     }
     
     public void login(String values[]){

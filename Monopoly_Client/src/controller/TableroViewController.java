@@ -22,6 +22,9 @@ import view.TableroView;
 public class TableroViewController {
     public static TableroView vista;
     
+    public static int dado1 = 1;
+    public static int dado2 = 1;
+    
     public static void load(TableroView from){
         vista=from;
         setElm();
@@ -73,8 +76,31 @@ public class TableroViewController {
     public static void Button_Throw(){
         if (Core.client != null){
             Core.client.sendMsg("lanzardado");
-        }            
+            Button_ThrowDisable();
+        }
+    }
+    
+    public static void enableInterface(){
+        Button_ThrowEnable();
+    }
+    
+    public static void disableInterface(){
         
+    }
+    
+    public static void updateInterface(){
+        DadosUpdate();
+        
+        try {      
+            Thread.sleep(20);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(TableroViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        TableroViewController.MovePiece(Core.listaJugadores.get(0).getPosition(),1);
+        TableroViewController.MovePiece(Core.listaJugadores.get(1).getPosition(),2);
+        TableroViewController.MovePiece(Core.listaJugadores.get(2).getPosition(),3);
+        TableroViewController.MovePiece(Core.listaJugadores.get(3).getPosition(),4);
     }
     
     public static void Button_ThrowEnable(){
@@ -85,17 +111,17 @@ public class TableroViewController {
         vista.GetButton_Throw().setEnabled(false);
     }
     
-    public static void ResultDado(int dado1,int dado2){//mostrar dados
+    public static void DadosSet(int dado1,int dado2){//mostrar dados
+        TableroViewController.dado1 = dado1;
+        TableroViewController.dado2 = dado2;
+    }
+    
+    public static void DadosUpdate(){
         vista.GetDado1().setIcon(new javax.swing.ImageIcon(TableroViewController.class.getResource("/resources/dado"+String.valueOf(dado1)+".png")));
         vista.GetDado2().setIcon(new javax.swing.ImageIcon(TableroViewController.class.getResource("/resources/dado"+String.valueOf(dado2)+".png")));
     }
     
-    public static void MoveChess(int casilla,int player){
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(TableroViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public static void MovePiece(int casilla,int player){
 
         int orig = 0;
         int axis = 0;

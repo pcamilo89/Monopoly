@@ -83,7 +83,15 @@ public class InStream extends Thread{
                     else if ( valuesArray[0].equals("startgame")){
                         //se inicia la partida con esta instruccion
                         startGame(valuesArray);
-                    }                    
+                    }
+                    else if ( valuesArray[0].equals("updateuser")){
+                        //se inicia la partida con esta instruccion
+                        updateUser(valuesArray);
+                    }
+                    else if ( valuesArray[0].equals("actualturn")){
+                        //se inicia la partida con esta instruccion
+                        actualTurn(valuesArray[1]);
+                    }
                     else if ( valuesArray[0].equals("lanzardado")){
                         resultDado(Integer.parseInt(valuesArray[1]),Integer.parseInt(valuesArray[2]));//Recibo el lanzamiento del dado para mostrarlo a la vista solamente
                     }
@@ -96,9 +104,8 @@ public class InStream extends Thread{
     
     public void resultDado(int dado1,int dado2){
         int sum = dado1 + dado2;
-        TableroViewController.ResultDado(dado1,dado2);
-        //temporal - esto se movera a actualizar tablero que sera siempre que se recibe algo durante la partida
-        TableroViewController.MoveChess(sum,1);//"1" es el jugador que en este momento está cableado con el jugador 1
+        TableroViewController.DadosSet(dado1,dado2);
+        //logica de movimiento va en servidor aqui solo se necesitan mostrar valores
     }
     
     public void startGame(String values[]){
@@ -132,6 +139,26 @@ public class InStream extends Thread{
         tablero.setVisible(true);
         
         TableroViewController.setActivePlayers();
+    }
+    
+    public void updateUser(String values[]){
+        //se busca el player por username values[1]
+        Player player = Core.getPlayer(values[1]);
+        player.setName(values[2]);
+        player.setLastname(values[3]);
+        player.setPosition(Integer.valueOf(values[4]));
+        player.setBalance(Integer.valueOf(values[5]));
+        player.setInJail(Boolean.valueOf(values[6]));
+        
+        //llamada a la interfaz para actualizar aqui
+        TableroViewController.updateInterface();
+    }
+    
+    public void actualTurn(String value){
+        Core.jugadorActual = value;
+        if(Core.jugadorActual.equals(Core.jugadorLocal.getUsername())){
+            TableroViewController.enableInterface();
+        }
     }
     
     public void connect(String values[]){

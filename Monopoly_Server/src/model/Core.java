@@ -30,11 +30,17 @@ public class Core {
     
     public static String playerActual =  null;
     
+    public static int turn = 0;
+    public static int dados[] = new int[2];
+    
     public static void initCore(){
         Core.userList = new UserList();
         Core.playerList = new ArrayList<>();
         Core.boardList =  new ArrayList<>();
         
+        //setear dados inicialmente en cero;
+        dados[0]=0;
+        dados[1]=0;
         //falta llenar listas de cartas y la listatablero
     }
     
@@ -56,43 +62,11 @@ public class Core {
         
     }
     
-    public static void startGame(){
+    public static void checkStartGameConditions(){
         if(!juegoEnCurso){
             if(server.countAuthUsers() >= 2 && server.countAuthUsers() <= 4){
                 //si hay entre 2 y 4 jugadores logueados
-                ServerViewController.addServerText(Utils.SERVER_GAME_ENOUGH);
-
-                initPlayers();
-                printPlayers();
-                
-                //se desconectan los usuarios que no iniciaron sesion.
-                server.disconectNonAuth();
-
-                //desabilitar el boton de iniciar partida
-                ServerViewController.startGameButtonDisable();
-                //enviar mensaje a clientes en lista jugador para habilitar interfaz de juego
-                int cant = Core.playerList.size();
-                
-                String msg = "startgame";
-                
-                //se envian los username para listas locales
-                for(Player act : Core.playerList){
-                    msg += ";"+act.getUser().getUsername();
-                }
-                
-                //si no son 4 se envian null por jugadores faltantes
-                if (cant < 4 ){
-                    cant = 4 - cant;
-                    for(int i=0;i<cant;i++){
-                        msg += ";null";
-                    }
-                }
-                
-                Core.msgAllPlayers(msg);
-                
-                
-                
-                juegoEnCurso = true;
+                gameStart();
             }
             else if(server.countAuthUsers() > 4){
                 //si hay mas de 4 usuarios logueados
@@ -100,15 +74,135 @@ public class Core {
                 server.disconectNonAuth();
                 server.disconectExcess();
                 //y volver a llamar a startgame
-                startGame();
+                checkStartGameConditions();
             }
             else{
                 //si hay menos de dos usuarios logueados
                 ServerViewController.addServerText(Utils.SERVER_GAME_NOT_ENOUGH);
             }
         }
-            
+    }
+    
+    public static void gameStart(){
+        ServerViewController.addServerText(Utils.SERVER_GAME_ENOUGH);
+
+        initPlayers();
+        printPlayers();
+
+        //se desconectan los usuarios que no iniciaron sesion.
+        server.disconectNonAuth();
+
+        //desabilitar el boton de iniciar partida
+        ServerViewController.startGameButtonDisable();
+        //enviar mensaje a clientes en lista jugador para habilitar interfaz de juego
+        int cant = Core.playerList.size();
+
+        String msg = "startgame";
+
+        //se envian los username para listas locales
+        for(Player act : Core.playerList){
+            msg += ";"+act.getUser().getUsername();
+        }
+
+        //si no son 4 se envian null por jugadores faltantes
+        if (cant < 4 ){
+            cant = 4 - cant;
+            for(int i=0;i<cant;i++){
+                msg += ";null";
+            }
+        }
         
+        Core.msgAllPlayers(msg);
+        //se envia informacion de todos los jugadores
+        sendPlayerInfo();
+        //se envia jugador actual
+        sendJugadorActual();
+        juegoEnCurso = true;
+    }
+    
+    public static void sendPlayerInfo(){
+        
+        for(Player act : Core.playerList){
+            String msg = "updateuser;"+act.getUser().getUsername()+";"+act.getUser().getName()+";"+act.getUser().getLastname();
+            msg += ";"+act.getPosition()+";"+act.getBalance()+";"+act.isInJail();
+            
+            msgAllPlayers(msg);
+        }
+    }
+    
+    public static Player getPlayerByUsername(String username){
+        for(Player player: playerList){
+            if ( player.getUser().getUsername().equals(username)) {
+                return player;
+            }
+        }
+        return null;
+    }
+    
+    public static void sendJugadorActual(){
+        String username = playerList.get(turn).getUser().getUsername();
+        playerActual = username;
+        msgAllPlayers("actualturn;"+username);
+        Player player = getPlayerByUsername(username);
+        player.setContJail(player.getContJail()+1);
+    }    
+    
+    public static void newTurn(){
+        Player player = getPlayerByUsername(playerActual);
+        //logica de movimiento si player actual no esta en la carcel
+        if (player.isInJail() == false){
+            //si los dados son iguales y la cuenta de dobles es menor a 3
+            if (dados[0]==dados[1] && player.getContJail() < 3){
+                sendJugadorActual();
+            }
+            else if(dados[0]==dados[1] && player.getContJail() == 3){
+                player.setInJail(true);
+                player.setContJail(0);
+                player.setPosition(10);            
+            }
+            else{
+                player.setContJail(0);
+                nextTurn();
+            }
+        }
+            
+    }
+    
+    public static void nextTurn(){
+        turn++;
+        int cant = Core.playerList.size()-1;
+        if (turn > cant){
+            turn = 0;
+        }
+        sendJugadorActual();
+    }
+    
+    public static void lanzarDados(){
+        Core.dados = Utils.lanzarDados();
+        Core.msgAllPlayers("lanzardado;"+Core.dados[0]+";"+Core.dados[1]);
+        
+        //se saca la suma de los dados
+        int sum = dados[0]+dados[1];
+        //se busca al jugador actual
+        Player act = getPlayerByUsername(playerActual);
+        //se actualiza su posicion
+        int pos = act.getPosition()+sum;
+        //si el numero es mayor a 39 se devuelve el conteo
+        if(pos > 39){
+            pos -= 40;
+        }
+        
+        act.setPosition(pos);
+        
+        //se envia a todos los clientes por msg
+        String msg = "updateuser;"+act.getUser().getUsername()+";"+act.getUser().getName()+";"+act.getUser().getLastname();
+        msg += ";"+act.getPosition()+";"+act.getBalance()+";"+act.isInJail();    
+        msgAllPlayers(msg);
+        
+        //logica de posicion del tablero va aqui.
+        
+        //proximo turno
+        newTurn();
         
     }
     

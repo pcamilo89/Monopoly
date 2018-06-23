@@ -28,7 +28,7 @@ public class TestPlayerPosition {
                 i=0;
             try {
                 Thread.sleep(1*1000);
-                TableroViewController.MoveChess(i, 1);
+                TableroViewController.MovePiece(i, 1);
                 System.out.println("i:"+i);
             } catch (InterruptedException ex) {
                 Logger.getLogger(TestPlayerPosition.class.getName()).log(Level.SEVERE, null, ex);
