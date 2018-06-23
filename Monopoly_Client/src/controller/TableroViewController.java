@@ -180,5 +180,17 @@ public class TableroViewController {
 
     }
 
-    
+    public static void setActivePlayers(){
+        int result[] = Core.jugadoresActivos();
+        
+        int i;
+        for(i=0;i<result.length;i++){
+            if(vista.getPlayerByIndex(i+1) != null ){
+                if(result[i]==1)
+                    vista.getPlayerByIndex(i+1).setVisible(true);
+                else
+                    vista.getPlayerByIndex(i+1).setVisible(false);
+            }    
+        }                  
+    }
 }

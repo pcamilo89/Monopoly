@@ -41,4 +41,33 @@ public class Core {
     public static void initPartida(){
         listaJugadores = new ArrayList<>();
     }
+    
+    public static void printPlayerList(){
+        for (Player act: listaJugadores) {
+            System.out.println(act.toString());
+        }
+    }
+    
+    public static int contarJugadores(){
+        int amount = 0;
+        for (Player act: listaJugadores) {
+            if ( act.isActivo() ) {
+                amount++;
+            }
+        }
+        return amount;
+    }
+    
+    public static int[] jugadoresActivos(){
+        int[] result =  new int[4];
+        for(int i=0;i<listaJugadores.size();i++){
+            if (listaJugadores.get(i).isActivo()){
+                result[i]=1;
+            }
+            else {
+                result[i]=0;
+            }            
+        }
+        return result;
+    }
 }

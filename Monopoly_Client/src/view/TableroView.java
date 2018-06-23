@@ -217,6 +217,22 @@ public class TableroView extends javax.swing.JFrame {
         return Label_P4;
     }
     
+    public JLabel getPlayerByIndex(int index){
+        if (index == 1){
+            return Label_P1;
+        }
+        else if (index == 2){
+            return Label_P2;
+        }
+        else if (index == 3){
+            return Label_P3;
+        }
+        else if (index == 4){
+            return Label_P4;
+        }
+        return null;
+    }
+    
     public void SetP1Location(int x,int y)
     {
         Label_P1.setLocation(x,y);

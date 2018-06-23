@@ -105,22 +105,33 @@ public class InStream extends Thread{
         Core.initPartida();
         //se cargan los jugadores en Core
         for(String act: values){
-            if( !act.equals("null")  && !act.equals("startgame" )){
+            if( !act.equals("startgame" )){
                 if( act.equals( Core.jugadorLocal.getUsername() ) ){
                     Core.listaJugadores.add( Core.jugadorLocal );
+                    Core.jugadorLocal.setActivo(true);
                 }
-                else {
-                    Core.listaJugadores.add( new Player(act) );
+                else if( !act.equals("null") ){
+                    Player player = new Player(act);
+                    player.setActivo(true);
+                    Core.listaJugadores.add( player );
+                }else {
+                    Player player = new Player(act);
+                    player.setActivo(false);
+                    Core.listaJugadores.add( player );
                 }
             }
         }
-        
-        System.out.println("Partida Iniciada:"+Core.listaJugadores.size());
+        //cantidad de jugadores
+        System.out.println("Jugadores: "+Core.contarJugadores());
+        Core.printPlayerList();
         
         ClientViewController.closeWindow();
         
         TableroView tablero = new TableroView();
+        
         tablero.setVisible(true);
+        
+        TableroViewController.setActivePlayers();
     }
     
     public void connect(String values[]){
