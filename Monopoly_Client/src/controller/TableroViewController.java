@@ -88,19 +88,28 @@ public class TableroViewController {
         
     }
     
+    public static void setTurno(){
+        
+    }
+    
+    public static void updateTurno(String turno){
+        
+        vista.GetTurno().setText("El turno es de:"+turno);
+    }
+    
     public static void updateInterface(){
         DadosUpdate();
         
         try {      
-            Thread.sleep(20);
+            Thread.sleep(50);
         } catch (InterruptedException ex) {
             Logger.getLogger(TableroViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         TableroViewController.MovePiece(Core.listaJugadores.get(0).getPosition(),1);
         TableroViewController.MovePiece(Core.listaJugadores.get(1).getPosition(),2);
         TableroViewController.MovePiece(Core.listaJugadores.get(2).getPosition(),3);
         TableroViewController.MovePiece(Core.listaJugadores.get(3).getPosition(),4);
+        vista.GetPlayer().setText(Core.jugadorLocal.getName());
     }
     
     public static void Button_ThrowEnable(){
