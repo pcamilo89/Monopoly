@@ -107,7 +107,39 @@ public class BoardProperty extends BoardOwnable{
 
     @Override
     public void rent(Player player) {
+        int amount =  getRentSimple();
         
+        if(checkGroupColor()){
+            if (getNumHouses() == 0){
+                amount *= 2;
+            }
+            else if(getNumHouses() == 1){
+                amount = getRentH1();
+            }
+            else if(getNumHouses() == 2){
+                amount = getRentH2();
+            }
+            else if(getNumHouses() == 3){
+                amount = getRentH3();
+            }
+            else if(getNumHouses() == 4){
+                amount = getRentH4();
+            }
+            else if(getNumHouses() == 5){
+                amount = getRentHotel();
+            }
+        }
+        
+        if (isMortaged()){
+            amount = 0;
+        }
+        
+        if(player.getBalance() > amount){
+            player.setBalance(player.getBalance() - amount);
+            getOwner().setBalance(getOwner().getBalance() + amount);
+        }else{
+            Core.playerBankruptcy(player);
+        }
     }
 
     @Override

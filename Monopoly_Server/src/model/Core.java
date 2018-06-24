@@ -19,19 +19,30 @@ public class Core {
     public static Server server;
     public static UserList userList;
     
+    //listas necesarias para la logica de juego
     public static ArrayList<Card> chanceList;
     public static ArrayList<Card> communityList;
-    
     public static ArrayList<Board> boardList;
-    
     public static ArrayList<Player> playerList;
     
+    //variable para saber si el juego esta en curso
     public static boolean juegoEnCurso = false;
     
+    //username del jugador actual
     public static String playerActual =  null;
     
+    //variable para saber el indice del jugador en turno
     public static int turn = 0;
+    
+    //variable para guardar valor de dados recibido por jugador actual
     public static int dados[] = new int[2];
+    
+    //variable para el modo de partida 0=normal, 1=cardNearest, 2=boardUtility
+    int mode = 0;
+    
+    //variables para el numero de casas y hoteles disponibles para compra
+    int houses = 32;
+    int hotels = 12;
     
     public static void initCore(){
         Core.userList = new UserList();
