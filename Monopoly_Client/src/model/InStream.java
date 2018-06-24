@@ -160,6 +160,8 @@ public class InStream extends Thread{
     
     public void actualTurn(String value){
         Core.jugadorActual = value;
+        TableroViewController.updateTurno(value);
+        TableroViewController.updateInterface();
         if(Core.jugadorActual.equals(Core.jugadorLocal.getUsername())){
             TableroViewController.enableInterface();
         }

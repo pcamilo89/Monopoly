@@ -49,6 +49,8 @@ public class TableroView extends javax.swing.JFrame {
         Panel_Dados = new javax.swing.JPanel();
         Label_Dado1 = new javax.swing.JLabel();
         Label_Dado2 = new javax.swing.JLabel();
+        Turno_lbl = new javax.swing.JLabel();
+        Player_lbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -157,27 +159,45 @@ public class TableroView extends javax.swing.JFrame {
         Label_Dado2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/dado2.png"))); // NOI18N
         Panel_Dados.add(Label_Dado2);
 
+        Turno_lbl.setText("Es el turno de:");
+
+        Player_lbl.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+
         javax.swing.GroupLayout Panel_LeftLayout = new javax.swing.GroupLayout(Panel_Left);
         Panel_Left.setLayout(Panel_LeftLayout);
         Panel_LeftLayout.setHorizontalGroup(
             Panel_LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_LeftLayout.createSequentialGroup()
-                .addContainerGap(218, Short.MAX_VALUE)
-                .addComponent(Button_Throw)
-                .addGap(101, 101, 101))
             .addGroup(Panel_LeftLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(Panel_Dados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(Panel_LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_LeftLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(Panel_Dados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Panel_LeftLayout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(Turno_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(139, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_LeftLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Panel_LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_LeftLayout.createSequentialGroup()
+                        .addComponent(Button_Throw)
+                        .addGap(101, 101, 101))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_LeftLayout.createSequentialGroup()
+                        .addComponent(Player_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         Panel_LeftLayout.setVerticalGroup(
             Panel_LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_LeftLayout.createSequentialGroup()
-                .addGap(141, 141, 141)
+                .addContainerGap()
+                .addComponent(Player_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
                 .addComponent(Button_Throw)
                 .addGap(18, 18, 18)
                 .addComponent(Panel_Dados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(673, Short.MAX_VALUE))
+                .addGap(82, 82, 82)
+                .addComponent(Turno_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(566, Short.MAX_VALUE))
         );
 
         getContentPane().add(Panel_Left, java.awt.BorderLayout.EAST);
@@ -185,6 +205,14 @@ public class TableroView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JLabel GetPlayer(){
+        return(Player_lbl);
+    }
+    
+    public JLabel GetTurno(){
+        return(Turno_lbl);
+    }
+    
     public JLabel GetDado1(){
         return(Label_Dado1);
     }
@@ -341,5 +369,7 @@ public class TableroView extends javax.swing.JFrame {
     private javax.swing.JPanel Panel_Dados;
     private javax.swing.JPanel Panel_Left;
     private javax.swing.JPanel Panel_Tablero;
+    private javax.swing.JLabel Player_lbl;
+    private javax.swing.JLabel Turno_lbl;
     // End of variables declaration//GEN-END:variables
 }
