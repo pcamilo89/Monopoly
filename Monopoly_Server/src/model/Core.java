@@ -141,6 +141,14 @@ public class Core {
         }
     }
     
+    public static void sendPlayerInfo(Player act){
+        
+            String msg = "updateuser;"+act.getUser().getUsername()+";"+act.getUser().getName()+";"+act.getUser().getLastname();
+            msg += ";"+act.getPosition()+";"+act.getBalance()+";"+act.isInJail();
+            
+            msgAllPlayers(msg);
+    }
+    
     public static Player getPlayerByUsername(String username){
         for(Player player: playerList){
             if ( player.getUser().getUsername().equals(username)) {
@@ -297,7 +305,37 @@ public class Core {
     }
     
     public static void playerBankruptcy(Player player){
-        //recorrer lista de propiedades y limpiar rastros del player (entregar al banco)
+        //se elimina de la lista de jugadores
+        Core.playerList.remove(player);
+        player.setBalance(0);
+        
+        //se le retiran todas las propiedades
+        for(Board board :Core.boardList){
+            //si la casilla es de clase BoardProperty
+            if(board.getClass().equals(BoardOwnable.class)){
+                BoardOwnable temp = (BoardOwnable) board;
+                //se chequea que el dueño sea el username recibido
+                temp.setOwner(null);
+                temp.setMortaged(false);
+                
+                if ( temp.getClass().equals(BoardProperty.class) ){
+                    BoardProperty tempPro = (BoardProperty) temp;
+                    //si es tipo property se le retiran las casas y hoteles
+                    
+                    if(tempPro.getNumHouses() < 5){
+                        Core.houses += tempPro.getNumHouses();
+                        tempPro.setNumHouses(0);
+                    }else if(tempPro.getNumHouses() == 5){
+                        Core.hotels += 1;
+                        tempPro.setNumHouses(0);
+                    }                  
+                }
+                
+            }
+        }
+        
+        //se envia a todos los clientes el player con flag activo false
+        Core.sendPlayerInfo(player);
     }
     
     public static int[] countPlayerHousesAndHotels(String username){

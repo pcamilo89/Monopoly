@@ -150,6 +150,10 @@ public class InStream extends Thread{
         player.setBalance(Integer.valueOf(values[5]));
         player.setInJail(Boolean.valueOf(values[6]));
         
+        if(player.getBalance() == 0){
+            player.setActivo(false);
+        }
+        
         //llamada a la interfaz para actualizar aqui
         TableroViewController.updateInterface();
     }
