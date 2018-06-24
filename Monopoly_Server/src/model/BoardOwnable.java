@@ -58,7 +58,7 @@ public abstract class BoardOwnable extends Board{
     }
     
     public void sell(){
-        if( owner != null ){            
+        if( owner != null && !isMortaged()){            
             owner.setBalance(owner.getBalance() + ( price/2 ));
             this.owner = null;
 

@@ -16,7 +16,6 @@ public class BoardProperty extends BoardOwnable{
     private GroupColor group;
     private int numHouses;
     private int priceHouse;
-    private int priceHotel;
     private int rentSimple;
     private int rentH1;
     private int rentH2;
@@ -29,7 +28,6 @@ public class BoardProperty extends BoardOwnable{
         this.group = group;
         this.numHouses = 0;
         this.priceHouse = priceHouse;
-        this.priceHotel = priceHotel;
         this.rentSimple = rentSimple;
         this.rentH1 = rentH1;
         this.rentH2 = rentH2;
@@ -54,10 +52,6 @@ public class BoardProperty extends BoardOwnable{
         return priceHouse;
     }
 
-    public int getPriceHotel() {
-        return priceHotel;
-    }
-
     public int getRentSimple() {
         return rentSimple;
     }
@@ -80,6 +74,65 @@ public class BoardProperty extends BoardOwnable{
 
     public int getRentHotel() {
         return rentHotel;
+    }
+    
+    public void buyAddOn(){
+        //si se es dueño del grupo color
+        if(checkGroupColor() && checkNumHousesGroupColor()){
+            //si tengo menos de 4, es decir solo casas
+            if(numHouses < 4){
+                //si hay casas disponibles para comprar
+                if(Core.houses > 0){
+                    if(getOwner().getBalance() > priceHouse){
+                        Core.houses -= 1;
+                        numHouses += 1;
+                        getOwner().setBalance(getOwner().getBalance() - priceHouse);
+                    }
+                }
+            }else if (numHouses == 4){
+                //si el numHouses es 4 y hay hoteles en core
+                if(Core.hotels > 0){
+                    if(getOwner().getBalance() > priceHouse){
+                        Core.houses += numHouses;
+                        Core.hotels -=1;
+                        numHouses += 1;
+                        getOwner().setBalance(getOwner().getBalance() - priceHouse);
+                    }
+                }
+            }
+        }
+    }
+    
+    public void sellAddon(){
+        //si hay casas o hotel
+        if(numHouses > 0 ){
+            //se chequea que se es el dueño del grupoColor y que los numeros del grupo sean iguales
+            if(checkGroupColor() && checkNumHousesGroupColor()){
+                //si se tienen casas
+                if ( numHouses < 5 ){
+                    Core.houses += 1;
+                    numHouses -= 1;
+                    getOwner().setBalance(getOwner().getBalance() + (priceHouse/2) );
+                }
+                //si se tiene hotel
+                else if(numHouses == 5){
+                    //solo si en core hay 4 casas o mas
+                    if( Core.houses >= 4 ) {
+                        //se obtienen las casas
+                        Core.houses -= 4;
+                        //se disminuye en uno el contador
+                        numHouses -=1;
+                        //se devuelve el hotel
+                        Core.hotels +=1;
+                        getOwner().setBalance(getOwner().getBalance() + (priceHouse/2) );
+                    }
+                }
+            }
+        }
+    }
+    
+    public boolean checkNumHousesGroupColor(){
+        return false;
     }
     
     public boolean checkGroupColor(){

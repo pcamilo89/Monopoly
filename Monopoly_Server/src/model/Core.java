@@ -38,11 +38,11 @@ public class Core {
     public static int dados[] = new int[2];
     
     //variable para el modo de partida 0=normal, 1=cardNearest, 2=boardUtility
-    int mode = 0;
+    public static int mode = 0;
     
     //variables para el numero de casas y hoteles disponibles para compra
-    int houses = 32;
-    int hotels = 12;
+    public static int houses = 32;
+    public static int hotels = 12;
     
     public static void initCore(){
         Core.userList = new UserList();
