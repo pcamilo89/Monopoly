@@ -24,6 +24,14 @@ public abstract class BoardOwnable extends Board{
         this.mortaged = false;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public int getMortageVal() {
+        return mortageVal;
+    }
+
     public Player getOwner() {
         return owner;
     }

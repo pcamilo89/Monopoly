@@ -188,7 +188,9 @@ public class Core {
         //se actualiza su posicion
         int pos = act.getPosition()+sum;
         //si el numero es mayor a 39 se devuelve el conteo
+        //suma 200 por pasar por go
         if(pos > 39){
+            act.setBalance(act.getBalance() + 200);
             pos -= 40;
         }
         
@@ -276,5 +278,9 @@ public class Core {
         }
         
         return card;
+    }
+    
+    public static void playerBankruptcy(Player player){
+        
     }
 }

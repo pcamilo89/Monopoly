@@ -35,6 +35,17 @@ public class Utils {
         COMMUNITY
     }
     
+    public enum GroupColor{
+        DARK_PURPLE,
+        LIGHT_BLUE,
+        LIGHT_PURPLE,
+        ORANGE,
+        RED,
+        YELLOW,
+        GREEN,
+        DARK_BLUE
+    }
+    
     /**
      * Metodo que retorna un numero pseudo random desde cero hasta tope -1, es decir sin incluir el valor tope.
      * @param tope

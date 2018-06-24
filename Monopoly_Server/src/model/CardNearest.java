@@ -32,6 +32,19 @@ public class CardNearest extends Card{
                 //si la posicion esta entre 13 y 27 se mueve a la 28
                 player.setPosition(28);
             }
+            
+            BoardOwnable temp = (BoardOwnable) Core.boardList.get( Core.getPlayerByUsername(Core.playerActual).getPosition());
+            
+            if (temp.getOwner() == null){
+                if( temp.getPrice() < player.getBalance() ){
+                    temp.buy(player);
+                }else{
+                    Core.playerBankruptcy(player);
+                }
+            }else{
+                //lanzar dado para pagar cardNearest (nuevas instrucciones)
+                //pagar al dueño 10 veces el valor de los dados
+            }
         }
         //si amount 1 nearest railroad
         else if ( this.getAmount() == 1 ) {
@@ -49,10 +62,22 @@ public class CardNearest extends Card{
             else if (pos >= 26 && pos <= 34 ) {
                 player.setPosition(35);
             }
+            
+            BoardOwnable temp = (BoardOwnable) Core.boardList.get( Core.getPlayerByUsername(Core.playerActual).getPosition());
+            
+            if (temp.getOwner() == null){
+                if( temp.getPrice() < player.getBalance() ){
+                    temp.buy(player);
+                }else{
+                    Core.playerBankruptcy(player);
+                }
+            }else{
+                //se paga el doble del alquiler
+                temp.rent(player);
+                temp.rent(player);
+            }
         }
-        
-        //falta bloque de codigo para comprar o pagar al dueño
-        //se puede optimizar a recorrer con ciclo una vez se tenga la lista tablero
+
     }
     
 }

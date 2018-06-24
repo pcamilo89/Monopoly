@@ -27,10 +27,11 @@ public class CardAmountFromPlayers extends Card{
                 }
                 else{
                     //primero se le retira el saldo
-                    act.setBalance(0);
                     player.setBalance(player.getBalance()+act.getBalance());
+                    act.setBalance(0);                   
                     
                     //luego se evalua caso de bancarrota
+                    Core.playerBankruptcy(act);
                 }
                 
                 

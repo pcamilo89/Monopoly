@@ -32,7 +32,7 @@ public class CardAmountToPlayers extends Card{
             }
         }
         else{
-            //en caso que el balance sea menor entra en bancarrota
+            Core.playerBankruptcy(player);
         }
     }
     

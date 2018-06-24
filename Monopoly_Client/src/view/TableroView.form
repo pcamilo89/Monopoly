@@ -78,7 +78,7 @@
             <Component class="javax.swing.JLabel" name="Label_P1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Resources/carr.png"/>
+                  <Image iconType="3" name="/resources/carr.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -90,7 +90,7 @@
             <Component class="javax.swing.JLabel" name="Label_P2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Resources/hat.png"/>
+                  <Image iconType="3" name="/resources/hat.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -102,7 +102,7 @@
             <Component class="javax.swing.JLabel" name="Label_P3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Resources/dog.png"/>
+                  <Image iconType="3" name="/resources/dog.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -114,7 +114,7 @@
             <Component class="javax.swing.JLabel" name="Label_P4">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Resources/dedal.png"/>
+                  <Image iconType="3" name="/resources/dedal.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -126,7 +126,7 @@
             <Component class="javax.swing.JLabel" name="Label_Tablero">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Resources/tabmonpoly.png"/>
+                  <Image iconType="3" name="/resources/tabmonpoly.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -271,14 +271,14 @@
             <Component class="javax.swing.JLabel" name="Label_Dado1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Resources/dado1.png"/>
+                  <Image iconType="3" name="/resources/dado1.png"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Label_Dado2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Resources/dado2.png"/>
+                  <Image iconType="3" name="/resources/dado2.png"/>
                 </Property>
               </Properties>
             </Component>

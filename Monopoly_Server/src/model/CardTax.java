@@ -48,7 +48,7 @@ public class CardTax extends Card{
             player.setBalance(player.getBalance() - price);
         }
         else {
-            //caso que el jugador cae en bancarrota
+            Core.playerBankruptcy(player);
         }
         
     }
