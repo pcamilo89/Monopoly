@@ -76,9 +76,30 @@ public class BoardProperty extends BoardOwnable{
         return rentHotel;
     }
     
-    public void buyAddOn(){
+    @Override
+    public void sell(){
+        if( this.numHouses == 0 ){
+            super.sell();
+        }
+    }
+    
+    @Override
+    public void auction(){
+        if( this.numHouses == 0 ){
+            super.auction();
+        }
+    }
+    
+    @Override
+    public void mortageOwnable(){
+        if( this.numHouses == 0 ){
+            super.mortageOwnable();
+        }
+    }
+    
+    public boolean buyAddOn(){
         //si se es dueño del grupo color
-        if(checkGroupColor() && checkNumHousesGroupColor()){
+        if(checkOwnerGroupColor() && checkNumHousesGroupColor()){
             //si tengo menos de 4, es decir solo casas
             if(numHouses < 4){
                 //si hay casas disponibles para comprar
@@ -87,6 +108,7 @@ public class BoardProperty extends BoardOwnable{
                         Core.houses -= 1;
                         numHouses += 1;
                         getOwner().setBalance(getOwner().getBalance() - priceHouse);
+                        return true;
                     }
                 }
             }else if (numHouses == 4){
@@ -97,22 +119,25 @@ public class BoardProperty extends BoardOwnable{
                         Core.hotels -=1;
                         numHouses += 1;
                         getOwner().setBalance(getOwner().getBalance() - priceHouse);
+                        return true;
                     }
                 }
             }
         }
-    }
-    
-    public void sellAddon(){
+        return false;
+    }    
+
+    public boolean sellAddon(){
         //si hay casas o hotel
         if(numHouses > 0 ){
             //se chequea que se es el dueño del grupoColor y que los numeros del grupo sean iguales
-            if(checkGroupColor() && checkNumHousesGroupColor()){
+            if(checkOwnerGroupColor() && checkNumHousesGroupColor()){
                 //si se tienen casas
                 if ( numHouses < 5 ){
                     Core.houses += 1;
                     numHouses -= 1;
                     getOwner().setBalance(getOwner().getBalance() + (priceHouse/2) );
+                    return true;
                 }
                 //si se tiene hotel
                 else if(numHouses == 5){
@@ -125,17 +150,43 @@ public class BoardProperty extends BoardOwnable{
                         //se devuelve el hotel
                         Core.hotels +=1;
                         getOwner().setBalance(getOwner().getBalance() + (priceHouse/2) );
+                        return true;
                     }
                 }
             }
         }
-    }
-    
-    public boolean checkNumHousesGroupColor(){
         return false;
     }
     
-    public boolean checkGroupColor(){
+    /**
+     * metodo que chequea que todas las las propiedades del grupoColor tengan el mismo numero de casas +/- 1;
+     * @return 
+     */
+    public boolean checkNumHousesGroupColor(){
+        boolean answer = true;
+        if (this.getOwner() != null && checkOwnerGroupColor()) {
+            //se chequean todas las casillas
+            for(Board board :Core.boardList){
+                //si la casilla es de clase BoardProperty
+                if(board.getClass().equals(this.getClass())){
+                    BoardProperty temp = (BoardProperty) board;
+                    //se chequea si es del mismo grupo color
+                    if(temp.getGroup().equals(this.getGroup())){
+                        if ( !(
+                                this.getNumHouses() == temp.getNumHouses() ||
+                                this.getNumHouses() == temp.getNumHouses() + 1 ||
+                                this.getNumHouses() == temp.getNumHouses() - 1 
+                              ) ){
+                            answer = false;
+                        }
+                    }
+                }
+            }
+        }
+        return answer;
+    }
+    
+    public boolean checkOwnerGroupColor(){
         if (this.getOwner() != null ) {
             //se chequean todas las casillas
             for(Board board :Core.boardList){
@@ -143,7 +194,7 @@ public class BoardProperty extends BoardOwnable{
                 if(board.getClass().equals(this.getClass())){
                     BoardProperty temp = (BoardProperty) board;
                     //se chequea si es del mismo grupo color y el dueño es distinto
-                    if(temp.group.equals(this.group) &&  !temp.getOwner().equals(this.getOwner()) ){
+                    if(temp.getGroup().equals(this.getGroup()) &&  !temp.getOwner().equals(this.getOwner()) ){
                         //se retorna falso
                         return false;
                     }
@@ -162,7 +213,7 @@ public class BoardProperty extends BoardOwnable{
     public void rent(Player player) {
         int amount =  getRentSimple();
         
-        if(checkGroupColor()){
+        if(checkOwnerGroupColor()){
             if (getNumHouses() == 0){
                 amount *= 2;
             }
