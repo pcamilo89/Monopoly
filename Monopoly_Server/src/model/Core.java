@@ -306,7 +306,24 @@ public class Core {
         int contHouse = 0;
         int contHotel = 0;
         
-        //recorrer lista de propiedades y si se encuentra sumar al contador correspondiente
+        for(Board board :Core.boardList){
+            //si la casilla es de clase BoardProperty
+            if(board.getClass().equals(BoardProperty.class)){
+                BoardProperty temp = (BoardProperty) board;
+                //se chequea que el dueño sea el username recibido
+                if(temp.getOwner().equals(username)){
+                    //si la cuenta es 5 es un hotel
+                    if(temp.getNumHouses() > 4 ){
+                        contHotel++;
+                    }
+                    else{
+                        //si es menor a cinco sumar la cuenta de casas
+                        contHouse += temp.getNumHouses();
+                    }
+                   
+                }
+            }
+        }
         
         data[0] = contHouse;
         data[1] = contHotel;
