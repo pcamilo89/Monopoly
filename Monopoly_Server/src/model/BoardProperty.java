@@ -14,6 +14,7 @@ import model.Utils.GroupColor;
  */
 public class BoardProperty extends BoardOwnable{
     private GroupColor group;
+    private int numHouses;
     private int priceHouse;
     private int priceHotel;
     private int rentSimple;
@@ -26,6 +27,7 @@ public class BoardProperty extends BoardOwnable{
     public BoardProperty(GroupColor group, int priceHouse, int priceHotel, int rentSimple, int rentH1, int rentH2, int rentH3, int rentH4, int rentHotel, String name, int price, int mortage) {
         super(name, price, mortage);
         this.group = group;
+        this.numHouses = 0;
         this.priceHouse = priceHouse;
         this.priceHotel = priceHotel;
         this.rentSimple = rentSimple;
@@ -34,8 +36,16 @@ public class BoardProperty extends BoardOwnable{
         this.rentH3 = rentH3;
         this.rentH4 = rentH4;
         this.rentHotel = rentHotel;
-    }    
+    }  
+ 
+    public int getNumHouses() {
+        return numHouses;
+    }
 
+    public void setNumHouses(int numHouses) {
+        this.numHouses = numHouses;
+    }
+    
     public GroupColor getGroup() {
         return group;
     }
@@ -71,15 +81,48 @@ public class BoardProperty extends BoardOwnable{
     public int getRentHotel() {
         return rentHotel;
     }
+    
+    public boolean checkGroupColor(){
+        if (this.getOwner() != null ) {
+            //se chequean todas las casillas
+            for(Board board :Core.boardList){
+                //si la casilla es de clase BoardProperty
+                if(board.getClass().equals(this.getClass())){
+                    BoardProperty temp = (BoardProperty) board;
+                    //se chequea si es del mismo grupo color y el dueño es distinto
+                    if(temp.group.equals(this.group) &&  !temp.getOwner().equals(this.getOwner()) ){
+                        //se retorna falso
+                        return false;
+                    }
+                }
+            }
+            //si pasa por todas las propiedades del mismo grupo color y no hay dueños distintos retorna true
+            return true;
+        }
+        else{
+            //si no tiene dueño return false
+            return false;
+        }        
+    }
 
     @Override
     public void rent(Player player) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void execute(Player player) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.getOwner() == null) {                       
+            if( player.getBalance() > getPrice() ){
+                buy(player);
+            }
+            else{
+                Core.playerBankruptcy(player);
+            }
+        }
+        else{
+            rent(player);
+        }
     }
     
 }

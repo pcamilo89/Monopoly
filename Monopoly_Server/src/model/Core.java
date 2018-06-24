@@ -147,6 +147,10 @@ public class Core {
         player.setContJail(player.getContJail()+1);
     }    
     
+    public static Player getJugadorActual(){
+        return getPlayerByUsername(playerActual);
+    }
+    
     public static void newTurn(){
         Player player = getPlayerByUsername(playerActual);
         //logica de movimiento si player actual no esta en la carcel
@@ -158,7 +162,8 @@ public class Core {
             else if(dados[0]==dados[1] && player.getContJail() == 3){
                 player.setInJail(true);
                 player.setContJail(0);
-                player.setPosition(10);            
+                player.setPosition(10);
+                nextTurn();
             }
             else{
                 player.setContJail(0);
@@ -281,6 +286,19 @@ public class Core {
     }
     
     public static void playerBankruptcy(Player player){
+        //recorrer lista de propiedades y limpiar rastros del player (entregar al banco)
+    }
+    
+    public static int[] countPlayerHousesAndHotels(String username){
+        //retorna array con 0=casas, 1=hoteles por defecto retornar 0 si no encuentra
+        int data[] = new int[2];
+        int contHouse = 0;
+        int contHotel = 0;
         
+        //recorrer lista de propiedades y si se encuentra sumar al contador correspondiente
+        
+        data[0] = contHouse;
+        data[1] = contHotel;
+        return data;
     }
 }

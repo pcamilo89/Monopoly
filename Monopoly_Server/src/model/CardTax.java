@@ -39,8 +39,9 @@ public class CardTax extends Card{
     @Override
     public void execute(Player player) {
         //se deben contar las casas y hoteles del jugador en todas sus propiedades
-        int countHouse = 0;
-        int countHotel = 0;
+        int data[] = Core.countPlayerHousesAndHotels(player.getUser().getUsername());
+        int countHouse = data[0];
+        int countHotel = data[1];
         int price = (countHouse * priceHouse) + (countHotel * priceHotel);
         
         //si el balance del jugador es mayor al precio
