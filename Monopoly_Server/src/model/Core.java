@@ -127,7 +127,7 @@ public class Core {
         //se envia informacion de todos los jugadores
         sendPlayerInfo();
         //se envia jugador actual
-        sendJugadorActual();
+        sendPlayerInTurn();
         juegoEnCurso = true;
     }
     
@@ -141,8 +141,7 @@ public class Core {
         }
     }
     
-    public static void sendPlayerInfo(Player act){
-        
+    public static void sendPlayerInfo(Player act){        
             String msg = "updateuser;"+act.getUser().getUsername()+";"+act.getUser().getName()+";"+act.getUser().getLastname();
             msg += ";"+act.getPosition()+";"+act.getBalance()+";"+act.isInJail();
             
@@ -158,7 +157,10 @@ public class Core {
         return null;
     }
     
-    public static void sendJugadorActual(){
+    /**
+     * 
+     */
+    public static void sendPlayerInTurn(){
         String username = playerList.get(turn).getUser().getUsername();
         playerActual = username;
         msgAllPlayers("actualturn;"+username);
@@ -169,67 +171,118 @@ public class Core {
     public static Player getJugadorActual(){
         return getPlayerByUsername(playerActual);
     }
-    
-    public static void newTurn(){
-        Player player = getPlayerByUsername(playerActual);
-        //logica de movimiento si player actual no esta en la carcel
-        if (player.isInJail() == false){
-            //si los dados son iguales y la cuenta de dobles es menor a 3
-            if (dados[0]==dados[1] && player.getContJail() < 3){
-                sendJugadorActual();
-            }
-            else if(dados[0]==dados[1] && player.getContJail() == 3){
-                player.setInJail(true);
-                player.setContJail(0);
-                player.setPosition(10);
-                nextTurn();
-            }
-            else{
-                player.setContJail(0);
-                nextTurn();
-            }
-        }
-            
-    }
-    
-    public static void nextTurn(){
+
+    public static void nextPlayerTurn(){
         turn++;
         int cant = Core.playerList.size()-1;
         if (turn > cant){
             turn = 0;
         }
-        sendJugadorActual();
     }
     
+    /**
+     * metodo que se llama al recibir instruccion de lanzar dados
+     */
     public static void lanzarDados(){
+        Player act = getPlayerByUsername(playerActual);
+        
         Core.dados = Utils.lanzarDados();
         Core.msgAllPlayers("lanzardado;"+Core.dados[0]+";"+Core.dados[1]);
         
+        boolean passGo = false;
+        
         //se saca la suma de los dados
         int sum = dados[0]+dados[1];
-        //se busca al jugador actual
-        Player act = getPlayerByUsername(playerActual);
-        //se actualiza su posicion
+        
         int pos = act.getPosition()+sum;
         //si el numero es mayor a 39 se devuelve el conteo
-        //suma 200 por pasar por go
+        //suma 200 por pasar por go con boolean passGo
         if(pos > 39){
-            act.setBalance(act.getBalance() + 200);
+            passGo = true;
             pos -= 40;
         }
         
-        act.setPosition(pos);
-        
-        //se envia a todos los clientes por msg
-        String msg = "updateuser;"+act.getUser().getUsername()+";"+act.getUser().getName()+";"+act.getUser().getLastname();
-        msg += ";"+act.getPosition()+";"+act.getBalance()+";"+act.isInJail();    
-        msgAllPlayers(msg);
-        
-        //logica de posicion del tablero va aqui.
-        
-        //proximo turno
-        newTurn();
-        
+        //si no esta en la carcel
+        if(!act.isInJail()){
+            //dados iguales y cuenta de dobles menor a 3
+            if (dados[0]==dados[1] && act.getContJail() < 3){
+                //notificar a todos posicion nueva
+                if(passGo){
+                    act.setBalance(act.getBalance() + 200);
+                }
+                act.setPosition(pos);
+                sendPlayerInfo(act);
+                //enviar mensaje de turno al mismo jugador
+                sendPlayerInTurn();
+            }
+            //dados iguales y cuenta igual a 3
+            else if(dados[0]==dados[1] && act.getContJail() == 3){
+                act.setInJail(true);
+                act.setContJail(0);
+                act.setPosition(10);
+                
+                sendPlayerInfo(act);
+                nextPlayerTurn();
+                sendPlayerInTurn();
+            }
+            //si se saca cualquier otro valor de dados
+            else{
+                //notificar a todos posicion nueva
+                if(passGo){
+                    act.setBalance(act.getBalance() + 200);
+                }
+                act.setPosition(pos);
+                sendPlayerInfo(act);
+                //resetear contador de dobles
+                act.setContJail(0);
+                //enviar mensaje de turno al siguiente jugador
+                nextPlayerTurn();
+                sendPlayerInTurn();
+            }
+        }
+        //si esta en la carcel
+        else{
+            //si lanza iguales y el contador no llega a 3
+            if(dados[0]==dados[1] && act.getContJail() < 3){
+                //sacar de estado carcel
+                act.setInJail(false);
+                act.setContJail(0);
+
+                act.setPosition(pos);
+                sendPlayerInfo(act);
+
+                //enviar mensaje de turno al siguiente jugador
+                nextPlayerTurn();
+                sendPlayerInTurn();
+            }
+            else if(dados[0]!=dados[1] && act.getContJail() < 3){
+                //enviar mensaje de turno al siguiente jugador
+                nextPlayerTurn();
+                sendPlayerInTurn();
+            }
+            else if(dados[0]!=dados[1] && act.getContJail() == 3){
+                //sacar de estado carcel
+                act.setInJail(false);
+                act.setContJail(0);                
+                
+                //multa del tercer turno
+                int fine = 50;
+                
+                if ( act.getBalance() > fine ) {
+                    act.setBalance(act.getBalance() - fine);
+                }
+                else{
+                    Core.playerBankruptcy(act);
+                }
+                
+                act.setPosition(pos);
+                sendPlayerInfo(act);                
+                
+                //enviar mensaje de turno al siguiente jugador
+                nextPlayerTurn();
+                sendPlayerInTurn();
+            }
+        }
     }
     
     public static void initPlayers(){
@@ -334,7 +387,7 @@ public class Core {
             }
         }
         
-        //se envia a todos los clientes el player con flag activo false
+        //se envia a todos los clientes el player con balance 0;
         Core.sendPlayerInfo(player);
     }
     

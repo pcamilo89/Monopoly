@@ -42,6 +42,8 @@ public class ChatPanelController {
                 ChatPanelController.sendTextButton();
             }
         });
+        
+        panel.getjTPTerminal().setEditable(false);
     }
     
     public static void sendTextButton(){
