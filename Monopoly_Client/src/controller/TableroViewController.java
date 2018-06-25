@@ -130,11 +130,11 @@ public class TableroViewController {
         if(index==3){
             vista.getNamePlayer(3).setText("Nombre:"+name);
             vista.getLastPLayer(3).setText("Apellido:"+lastname);
-            vista.getBalPlayer(4).setText("Balance:"+balance);
+            vista.getBalPlayer(3).setText("Balance:"+balance);
         }
         if(index==4){
-            vista.getNamePlayer(4).setText("Nombre jugador:"+name);
-            vista.getLastPLayer(4).setText("Apellido jugador:"+lastname);
+            vista.getNamePlayer(4).setText("Nombre:"+name);
+            vista.getLastPLayer(4).setText("Apellido:"+lastname);
             vista.getBalPlayer(4).setText("Balance:"+balance);
         }
     }
@@ -145,6 +145,11 @@ public class TableroViewController {
     
     public static void Button_ThrowDisable(){
         vista.GetButton_Throw().setEnabled(false);
+    }
+    
+    public static void HidePlayer(int i)
+    {
+        vista.getPanelPlayer(i).setVisible(false);
     }
     
     public static void DadosSet(int dado1,int dado2){//mostrar dados
