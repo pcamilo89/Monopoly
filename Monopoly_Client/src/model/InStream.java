@@ -155,7 +155,7 @@ public class InStream extends Thread{
             player.setActivo(false);
         }
 
-		//int i=1;
+	int i=1;
         for (Player act :Core.listaJugadores)
         {
            TableroViewController.FillInfoPlayer(act.getName(),act.getLastname(),String.valueOf(act.getBalance()),i);
