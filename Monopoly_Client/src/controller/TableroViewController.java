@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Core;
+import view.ChatPanel;
 import view.TableroView;
 
 /**
@@ -66,6 +67,8 @@ public class TableroViewController {
             }
         });
         Button_ThrowDisable();
+        
+        vista.getPanel_ChatContainer().add(new ChatPanel());
     }
     
     public static void closeWindow(){
