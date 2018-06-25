@@ -19,19 +19,30 @@ public class Core {
     public static Server server;
     public static UserList userList;
     
+    //listas necesarias para la logica de juego
     public static ArrayList<Card> chanceList;
     public static ArrayList<Card> communityList;
-    
     public static ArrayList<Board> boardList;
-    
     public static ArrayList<Player> playerList;
     
+    //variable para saber si el juego esta en curso
     public static boolean juegoEnCurso = false;
     
+    //username del jugador actual
     public static String playerActual =  null;
     
+    //variable para saber el indice del jugador en turno
     public static int turn = 0;
+    
+    //variable para guardar valor de dados recibido por jugador actual
     public static int dados[] = new int[2];
+    
+    //variable para el modo de partida 0=normal, 1=cardNearest, 2=boardUtility
+    public static int mode = 0;
+    
+    //variables para el numero de casas y hoteles disponibles para compra
+    public static int houses = 32;
+    public static int hotels = 12;
     
     public static void initCore(){
         Core.userList = new UserList();
@@ -130,6 +141,14 @@ public class Core {
         }
     }
     
+    public static void sendPlayerInfo(Player act){
+        
+            String msg = "updateuser;"+act.getUser().getUsername()+";"+act.getUser().getName()+";"+act.getUser().getLastname();
+            msg += ";"+act.getPosition()+";"+act.getBalance()+";"+act.isInJail();
+            
+            msgAllPlayers(msg);
+    }
+    
     public static Player getPlayerByUsername(String username){
         for(Player player: playerList){
             if ( player.getUser().getUsername().equals(username)) {
@@ -147,6 +166,10 @@ public class Core {
         player.setContJail(player.getContJail()+1);
     }    
     
+    public static Player getJugadorActual(){
+        return getPlayerByUsername(playerActual);
+    }
+    
     public static void newTurn(){
         Player player = getPlayerByUsername(playerActual);
         //logica de movimiento si player actual no esta en la carcel
@@ -158,7 +181,8 @@ public class Core {
             else if(dados[0]==dados[1] && player.getContJail() == 3){
                 player.setInJail(true);
                 player.setContJail(0);
-                player.setPosition(10);            
+                player.setPosition(10);
+                nextTurn();
             }
             else{
                 player.setContJail(0);
@@ -188,7 +212,9 @@ public class Core {
         //se actualiza su posicion
         int pos = act.getPosition()+sum;
         //si el numero es mayor a 39 se devuelve el conteo
+        //suma 200 por pasar por go
         if(pos > 39){
+            act.setBalance(act.getBalance() + 200);
             pos -= 40;
         }
         
@@ -276,5 +302,69 @@ public class Core {
         }
         
         return card;
+    }
+    
+    public static void playerBankruptcy(Player player){
+        //se elimina de la lista de jugadores
+        Core.playerList.remove(player);
+        player.setBalance(0);
+        
+        //se le retiran todas las propiedades
+        for(Board board :Core.boardList){
+            //si la casilla es de clase BoardProperty
+            if(board.getClass().equals(BoardOwnable.class)){
+                BoardOwnable temp = (BoardOwnable) board;
+                //se chequea que el dueño sea el username recibido
+                temp.setOwner(null);
+                temp.setMortaged(false);
+                
+                if ( temp.getClass().equals(BoardProperty.class) ){
+                    BoardProperty tempPro = (BoardProperty) temp;
+                    //si es tipo property se le retiran las casas y hoteles
+                    
+                    if(tempPro.getNumHouses() < 5){
+                        Core.houses += tempPro.getNumHouses();
+                        tempPro.setNumHouses(0);
+                    }else if(tempPro.getNumHouses() == 5){
+                        Core.hotels += 1;
+                        tempPro.setNumHouses(0);
+                    }                  
+                }
+                
+            }
+        }
+        
+        //se envia a todos los clientes el player con flag activo false
+        Core.sendPlayerInfo(player);
+    }
+    
+    public static int[] countPlayerHousesAndHotels(String username){
+        //retorna array con 0=casas, 1=hoteles por defecto retornar 0 si no encuentra
+        int data[] = new int[2];
+        int contHouse = 0;
+        int contHotel = 0;
+        
+        for(Board board :Core.boardList){
+            //si la casilla es de clase BoardProperty
+            if(board.getClass().equals(BoardProperty.class)){
+                BoardProperty temp = (BoardProperty) board;
+                //se chequea que el dueño sea el username recibido
+                if(temp.getOwner().equals(username)){
+                    //si la cuenta es 5 es un hotel
+                    if(temp.getNumHouses() > 4 ){
+                        contHotel++;
+                    }
+                    else{
+                        //si es menor a cinco sumar la cuenta de casas
+                        contHouse += temp.getNumHouses();
+                    }
+                   
+                }
+            }
+        }
+        
+        data[0] = contHouse;
+        data[1] = contHotel;
+        return data;
     }
 }

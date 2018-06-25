@@ -150,12 +150,18 @@ public class InStream extends Thread{
         player.setPosition(Integer.valueOf(values[4]));
         player.setBalance(Integer.valueOf(values[5]));
         player.setInJail(Boolean.valueOf(values[6]));
-        int i=1;
+       
+        if(player.getBalance() == 0){
+            player.setActivo(false);
+        }
+
+	int i=1;
         for (Player act :Core.listaJugadores)
         {
            TableroViewController.FillInfoPlayer(act.getName(),act.getLastname(),String.valueOf(act.getBalance()),i);
            i++;
         }
+        
         //llamada a la interfaz para actualizar aqui
         TableroViewController.updateInterface();
     }

@@ -24,6 +24,14 @@ public abstract class BoardOwnable extends Board{
         this.mortaged = false;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public int getMortageVal() {
+        return mortageVal;
+    }
+
     public Player getOwner() {
         return owner;
     }
@@ -50,7 +58,7 @@ public abstract class BoardOwnable extends Board{
     }
     
     public void sell(){
-        if( owner != null ){            
+        if( owner != null && !isMortaged()){            
             owner.setBalance(owner.getBalance() + ( price/2 ));
             this.owner = null;
 

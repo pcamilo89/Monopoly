@@ -25,7 +25,7 @@ public class BoardRemoveAmount extends Board{
             player.setBalance(player.getBalance() - amount);
         }
         else {
-            //caso en que el jugador cae en bancarrota
+            Core.playerBankruptcy(player);
         }
     }
     
