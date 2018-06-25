@@ -19,6 +19,11 @@ public class BoardRemoveAmount extends Board{
     }
 
     @Override
+    public String toString() {
+        return "BoardRemoveAmount{" + "name=" + this.getName() + ", amount=" + amount + '}';
+    }
+
+    @Override
     public void execute(Player player) {
         //si el jugador tiene balance mayor a la cantidad.
         if (player.getBalance() > amount) {

@@ -23,6 +23,11 @@ public class BoardGrabCard extends Board{
     }
 
     @Override
+    public String toString() {
+        return "BoardGrabCard{" + "type=" + type + '}';
+    }
+    
+    @Override
     public void execute(Player player) {
         //se busca la carta aleatoria segun el tipo de la casilla
         Card  card = Core.getRandomCard(Core.getCardList(type));

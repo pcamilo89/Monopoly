@@ -26,4 +26,10 @@ public abstract class Board {
     }
     
     public abstract void execute(Player player);
+
+    @Override
+    public String toString() {
+        return "Board{" + "name=" + name + '}';
+    }   
+    
 }

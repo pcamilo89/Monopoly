@@ -10,6 +10,7 @@ import controller.ServerViewController;
 import java.util.ArrayList;
 import java.util.Random;
 import model.Utils.CardType;
+import model.Utils.GroupColor;
 
 /**
  *
@@ -52,7 +53,25 @@ public class Core {
         //setear dados inicialmente en cero;
         dados[0]=0;
         dados[1]=0;
+        
+        //llenar lista tablero
+        fillBoard();
         //falta llenar listas de cartas y la listatablero
+    }
+    
+    public static void fillBoard(){
+        boardList.add(new BoardPlain("GO") );
+        boardList.add(new BoardProperty(GroupColor.DARK_PURPLE, 50, 2, 10, 30, 90, 160, 250, "Av. Mediterraneo", 60, 30));
+        boardList.add(new BoardGrabCard(CardType.COMMUNITY));
+        boardList.add(new BoardProperty(GroupColor.DARK_PURPLE, 50, 4, 20, 60, 180, 320, 450, "Av. Baltica", 60, 30));
+        boardList.add(new BoardRemoveAmount("Impuesto", 200));
+        boardList.add(new BoardRailroad("Ferrocarril Reading", 200, 100));
+        boardList.add(new BoardProperty(GroupColor.LIGHT_BLUE, 50, 6, 30, 90, 270, 400, 550, "Av. Oriental", 100, 50));
+        boardList.add(new BoardGrabCard(CardType.CHANCE));
+        boardList.add(new BoardProperty(GroupColor.LIGHT_BLUE, 50, 6, 30, 90, 270, 400, 550, "Av. Vermont", 100, 50));
+        boardList.add(new BoardProperty(GroupColor.LIGHT_BLUE, 50, 8, 40, 100, 300, 450, 600, "Av. Connecticut", 120, 60));
+        boardList.add(new BoardPlain("Jail"));
+        
     }
     
     public static void startServer(int port){

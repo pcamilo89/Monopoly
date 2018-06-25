@@ -54,6 +54,11 @@ public class BoardRailroad extends BoardOwnable{
     }
 
     @Override
+    public String toString() {
+        return "BoardRailroad{" + super.toString()+ '}';
+    }
+
+    @Override
     public void execute(Player player) {
         if (this.getOwner() != null){
             rent(player);

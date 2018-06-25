@@ -90,6 +90,11 @@ public abstract class BoardOwnable extends Board{
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "BoardOwnable{" + "name=" + this.getName() + ", owner=" + owner + ", price=" + price + ", mortageVal=" + mortageVal + ", mortaged=" + mortaged + '}';
+    }    
     
     public abstract void rent(Player player);
 }

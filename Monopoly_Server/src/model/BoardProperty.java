@@ -23,7 +23,21 @@ public class BoardProperty extends BoardOwnable{
     private int rentH4;
     private int rentHotel;
 
-    public BoardProperty(GroupColor group, int priceHouse, int priceHotel, int rentSimple, int rentH1, int rentH2, int rentH3, int rentH4, int rentHotel, String name, int price, int mortage) {
+    /**
+     * 
+     * @param group grupoColor
+     * @param priceHouse precio casa/hotel
+     * @param rentSimple renta simple
+     * @param rentH1 renta 1 casa   
+     * @param rentH2 renta 2 casas
+     * @param rentH3 renta 3 casas
+     * @param rentH4 renta 4 casas
+     * @param rentHotel renta hotel
+     * @param name nombre propiedad
+     * @param price precio
+     * @param mortage hipoteca
+     */
+    public BoardProperty(GroupColor group, int priceHouse, int rentSimple, int rentH1, int rentH2, int rentH3, int rentH4, int rentHotel, String name, int price, int mortage) {
         super(name, price, mortage);
         this.group = group;
         this.numHouses = 0;
@@ -74,6 +88,11 @@ public class BoardProperty extends BoardOwnable{
 
     public int getRentHotel() {
         return rentHotel;
+    }
+
+    @Override
+    public String toString() {
+        return "BoardProperty{" + super.toString() + ", group=" + group + ", numHouses=" + numHouses + ", priceHouse=" + priceHouse + ", rentSimple=" + rentSimple + ", rentH1=" + rentH1 + ", rentH2=" + rentH2 + ", rentH3=" + rentH3 + ", rentH4=" + rentH4 + ", rentHotel=" + rentHotel + '}';
     }
     
     @Override
