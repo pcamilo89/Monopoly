@@ -212,5 +212,6 @@ public class InStream extends Thread{
     
     public void alertMsg(String msg){
         Utils.textDialog(msg, Core.frameActual);
+        ChatPanelController.addServerText(msg);
     }
 }
