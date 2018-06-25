@@ -16,7 +16,7 @@ public class Core {
     public static Client client;
     
     public static ArrayList<Player> listaJugadores;
-    
+    public static ArrayList<Board> listaBoard;
     public static Player jugadorLocal;
     public static String jugadorActual;
     
@@ -40,6 +40,51 @@ public class Core {
     
     public static void initPartida(){
         listaJugadores = new ArrayList<>();
+        listaBoard = new ArrayList<>();
+        FillBoard();
+    }
+    
+    public static void FillBoard(){
+        listaBoard.add(new Board("Go"));
+        listaBoard.add(new Board("Avenida Mediterráneo"));
+        listaBoard.add(new Board("Arca Comunal"));
+        listaBoard.add(new Board("Avenida Báltica"));
+        listaBoard.add(new Board("Impuesto"));
+        listaBoard.add(new Board("Ferrocarril Reading"));
+        listaBoard.add(new Board("Avenida Oriental"));
+        listaBoard.add(new Board("Casualidad"));
+        listaBoard.add(new Board("Avenida Vermont"));
+        listaBoard.add(new Board("Avenida Conecticut"));
+        listaBoard.add(new Board("Cárcel"));
+        listaBoard.add(new Board("Plaza San Carlos"));
+        listaBoard.add(new Board("Compañia Electrica"));
+        listaBoard.add(new Board("Avenida de los Estados"));
+        listaBoard.add(new Board("Avenida Virginia"));
+        listaBoard.add(new Board("Ferrocarril Pensilvania"));
+        listaBoard.add(new Board("Plaza Santiago"));
+        listaBoard.add(new Board("Arca Comunal"));
+        listaBoard.add(new Board("Avenida Tenesse"));
+        listaBoard.add(new Board("Avenida Nueva York"));
+        listaBoard.add(new Board("Parada Libre"));
+        listaBoard.add(new Board("Avenida Kentucky"));
+        listaBoard.add(new Board("Casualidad"));
+        listaBoard.add(new Board("Avenida Indiana"));
+        listaBoard.add(new Board("Avenida Illinois"));
+        listaBoard.add(new Board("Ferrocarril B & O"));
+        listaBoard.add(new Board("Avenida Atlántico"));
+        listaBoard.add(new Board("Avenida Ventnor"));
+        listaBoard.add(new Board("Obras de Agua Potable"));
+        listaBoard.add(new Board("Jardines Marvin"));
+        listaBoard.add(new Board("Ir a Carcel"));
+        listaBoard.add(new Board("Avenida Pacífico"));
+        listaBoard.add(new Board("Avenida Carolina del Norte"));
+        listaBoard.add(new Board("Arca Comunal"));
+        listaBoard.add(new Board("Avenida Pensilvania"));
+        listaBoard.add(new Board("Ferrocarril Short Line"));//acomodar el nombre del ferrocarril
+        listaBoard.add(new Board("Casualidad"));
+        listaBoard.add(new Board("Plaza del Parque"));
+        listaBoard.add(new Board("Impuesto de Alujo"));
+        listaBoard.add(new Board("Paseo Tablado"));
     }
     
     public static void printPlayerList(){
@@ -56,6 +101,10 @@ public class Core {
             }
         }
         return amount;
+    }
+    
+    public static String getCasilla(){
+        return ("Casilla actual: "+listaBoard.get(Core.jugadorLocal.getPosition()).getName());
     }
     
     public static int[] jugadoresActivos(){

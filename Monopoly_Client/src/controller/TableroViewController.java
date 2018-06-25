@@ -113,6 +113,7 @@ public class TableroViewController {
         TableroViewController.MovePiece(Core.listaJugadores.get(2).getPosition(),3);
         TableroViewController.MovePiece(Core.listaJugadores.get(3).getPosition(),4);
         vista.GetPlayer().setText(Core.jugadorLocal.getName());
+        vista.getNameC().setText(Core.getCasilla());
     }
     
     public static void FillInfoPlayer(String name,String lastname,String balance,int index)
@@ -259,7 +260,6 @@ public class TableroViewController {
             vista.SetP4Location(orig+50,axis+55);
         else if(player==4)
             vista.SetP4Location(orig+25,axis+20);
-
     }
 
     public static void setActivePlayers(){
