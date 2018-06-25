@@ -49,6 +49,8 @@ public class Core {
         Core.userList = new UserList();
         Core.playerList = new ArrayList<>();
         Core.boardList =  new ArrayList<>();
+        Core.chanceList = new ArrayList<>();
+        Core.communityList = new ArrayList<>();
         
         //setear dados inicialmente en cero;
         dados[0]=0;
@@ -57,6 +59,8 @@ public class Core {
         //llenar lista tablero
         fillBoard();
         //falta llenar listas de cartas y la listatablero
+        chanceList = getCardList(CardType.CHANCE);
+        communityList = getCardList(CardType.COMMUNITY);
     }
     
     public static void fillBoard(){
@@ -438,5 +442,44 @@ public class Core {
         data[0] = contHouse;
         data[1] = contHotel;
         return data;
+    }
+    
+    public static void fillChanceCardList(ArrayList<Card> list)
+    {
+        chanceList.add(new CardGoToJail(CardType.CHANCE, 0, "Ve directamente a la carcel. No pasas por GO. No colectas $200"));
+        chanceList.add(new CardJumpTo(CardType.CHANCE,0,"Avanza a Illinois Ave. Si pasas por GO colectas $200"));
+        chanceList.add(new CardJumpTo(CardType.CHANCE,0,"Avanza a St Charles Place. Si pasas por GO colectas $200"));
+        chanceList.add(new CardMoveBack(CardType.CHANCE,0,"Retrocede 3 pasos"));
+        chanceList.add(new CardJumpTo(CardType.CHANCE,0,"Ve a GO. Colecta $200"));
+        chanceList.add(new CardNearest(CardType.CHANCE, 0, "Ve a la utilidad mas cercana. Si no esta comprada, se la puede comprar al banco. Si esta comprada, arroje los dados y paguese al propietario 10 veces el numero obtenido"));
+        chanceList.add(new CardNearest(CardType.CHANCE, 1, "Ve al Railroad mas cercano. Si esta comprada, paguese al propietario el doble de la renta que tenga. Si no esta comprada, se la puede comprar al banco"));
+        chanceList.add(new CardAddAmount(CardType.CHANCE,50,"El banco te paga $50"));
+        chanceList.add(new CardAddAmount(CardType.CHANCE, 150, "Tus edificios y prestamos han madurado. Colecta $150"));
+        chanceList.add(new CardAddAmount(CardType.CHANCE, 100, "Has ganado una competencia de crucigramas, Colecta $100"));
+        chanceList.add(new CardOutOfJail(CardType.CHANCE, 0, "Sal de la carcel gratis"));
+        chanceList.add(new CardRemoveAmount(CardType.CHANCE, 15, "Paga tus impuestos, $15"));
+        chanceList.add(new CardAmountToPlayers(CardType.CHANCE, 50, "Has sido elegido Chairman de la partida. Paga a cada jugador $50"));
+        System.out.println("chanceList: "+new String(chanceList.toString()));
+    }
+    
+    public static void fillCommunityCardList(ArrayList<Card> list)
+    {
+        communityList.add(new CardJumpTo(CardType.COMMUNITY,0, "Ve a GO. Colecta $200"));
+        communityList.add(new CardAddAmount(CardType.COMMUNITY,200,"Error del banco a tu favor. Colecta $200"));
+        communityList.add(new CardRemoveAmount(CardType.COMMUNITY, 50, "Factura medica. Paga $50"));
+        communityList.add(new CardAddAmount(CardType.COMMUNITY, 50, "De las vetas de tus acciones obtienes $50"));
+        communityList.add(new CardOutOfJail(CardType.COMMUNITY, 0, "Sales de la carcel gratis"));
+        communityList.add(new CardGoToJail(CardType.COMMUNITY, 0, "Ve directamente a la carcel. No pasas por GO. No colectas $200"));
+        communityList.add(new CardAmountFromPlayers(CardType.COMMUNITY, 50, "Gran noche de Opera. Colecta $50 decada jugador por asientos en noche de apertura"));
+        communityList.add(new CardAddAmount(CardType.COMMUNITY, 100, "Ha madurado tu fondo de vacaciones. Colecta $100"));
+        communityList.add(new CardAddAmount(CardType.COMMUNITY, 20, "Reembolso de impuestos. Colecta 20"));
+        communityList.add(new CardAddAmount(CardType.COMMUNITY, 100, "Ha madurado tu seguro de vida. Colecta $100"));
+        communityList.add(new CardRemoveAmount(CardType.COMMUNITY, 100, "Paga $100 en la factura del hospital"));
+        communityList.add(new CardRemoveAmount(CardType.COMMUNITY, 150, "Paga $150 en la factura del colegio"));
+        communityList.add(new CardAddAmount(CardType.COMMUNITY, 25, "Recibe $25 por trabajos de consultor"));
+        communityList.add(new CardTax(40,150,CardType.COMMUNITY, 0, "Haz sido juzgado para reparaciones de calle, $40 por casa, $115 por hotel"));
+        communityList.add(new CardAddAmount(CardType.COMMUNITY, 10, "Haz quedado en segundo lugar en un concurso de belleza. Colecta $10"));
+        communityList.add(new CardAddAmount(CardType.COMMUNITY, 100, "Haz heredado $100"));
+        System.out.println("communityList: "+new String(communityList.toString()));
     }
 }
