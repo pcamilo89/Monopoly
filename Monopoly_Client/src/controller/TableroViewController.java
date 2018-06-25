@@ -32,7 +32,7 @@ public class TableroViewController {
     
     public static void setElm()
     {
-        vista.setMinimumSize(new Dimension(700+400, 700));
+        vista.setMinimumSize(new Dimension(700+500, 700));
         vista.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         
         WindowListener exitListener = new WindowAdapter() {
@@ -105,11 +105,36 @@ public class TableroViewController {
         } catch (InterruptedException ex) {
             Logger.getLogger(TableroViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         TableroViewController.MovePiece(Core.listaJugadores.get(0).getPosition(),1);
         TableroViewController.MovePiece(Core.listaJugadores.get(1).getPosition(),2);
         TableroViewController.MovePiece(Core.listaJugadores.get(2).getPosition(),3);
         TableroViewController.MovePiece(Core.listaJugadores.get(3).getPosition(),4);
         vista.GetPlayer().setText(Core.jugadorLocal.getName());
+    }
+    
+    public static void FillInfoPlayer(String name,String lastname,String balance,int index)
+    {
+        if(index==1){
+            vista.getNamePlayer(1).setText("Nombre:"+name);
+            vista.getLastPLayer(1).setText("Apellido:"+lastname);
+            vista.getBalPlayer(1).setText("Balance:"+balance);
+        }
+        if(index==2){
+            vista.getNamePlayer(2).setText("Nombre:"+name);
+            vista.getLastPLayer(2).setText("Apellido:"+lastname);
+            vista.getBalPlayer(2).setText("Balance:"+balance);
+        }
+        if(index==3){
+            vista.getNamePlayer(3).setText("Nombre:"+name);
+            vista.getLastPLayer(3).setText("Apellido:"+lastname);
+            vista.getBalPlayer(4).setText("Balance:"+balance);
+        }
+        if(index==4){
+            vista.getNamePlayer(4).setText("Nombre jugador:"+name);
+            vista.getLastPLayer(4).setText("Apellido jugador:"+lastname);
+            vista.getBalPlayer(4).setText("Balance:"+balance);
+        }
     }
     
     public static void Button_ThrowEnable(){
@@ -221,10 +246,15 @@ public class TableroViewController {
         int i;
         for(i=0;i<result.length;i++){
             if(vista.getPlayerByIndex(i+1) != null ){
-                if(result[i]==1)
+                if(result[i]==1){
                     vista.getPlayerByIndex(i+1).setVisible(true);
+                    vista.getPanelPlayer(i+1).setVisible(true);
+                }
                 else
+                {
                     vista.getPlayerByIndex(i+1).setVisible(false);
+                    vista.getPanelPlayer(i+1).setVisible(false);
+                }
             }    
         }                  
     }

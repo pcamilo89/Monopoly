@@ -87,6 +87,7 @@ public class InStream extends Thread{
                     else if ( valuesArray[0].equals("updateuser")){
                         //se inicia la partida con esta instruccion
                         updateUser(valuesArray);
+                        
                     }
                     else if ( valuesArray[0].equals("actualturn")){
                         //se inicia la partida con esta instruccion
@@ -149,7 +150,12 @@ public class InStream extends Thread{
         player.setPosition(Integer.valueOf(values[4]));
         player.setBalance(Integer.valueOf(values[5]));
         player.setInJail(Boolean.valueOf(values[6]));
-        
+        int i=1;
+        for (Player act :Core.listaJugadores)
+        {
+           TableroViewController.FillInfoPlayer(act.getName(),act.getLastname(),String.valueOf(act.getBalance()),i);
+           i++;
+        }
         //llamada a la interfaz para actualizar aqui
         TableroViewController.updateInterface();
     }
