@@ -107,8 +107,7 @@ public class TableroViewController {
             Thread.sleep(50);
         } catch (InterruptedException ex) {
             Logger.getLogger(TableroViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }  
         TableroViewController.MovePiece(Core.listaJugadores.get(0).getPosition(),1);
         TableroViewController.MovePiece(Core.listaJugadores.get(1).getPosition(),2);
         TableroViewController.MovePiece(Core.listaJugadores.get(2).getPosition(),3);
@@ -180,8 +179,8 @@ public class TableroViewController {
         }
         else if(casilla==10)
         {
-            orig =vista.GetJailx()+30;
-            axis =vista.GetJaily()+30;  
+            orig =vista.GetJailx();
+            axis =vista.GetJaily();  
         }
         else if(casilla>10 && casilla<=19)
         {
@@ -231,15 +230,30 @@ public class TableroViewController {
             }
             
         }
-        
-        if(player == 1)
-            vista.SetP1Location(orig,axis);       
-        else if(player == 2)
+        if(player == 1 && casilla==10 && Core.listaJugadores.get(1).isInJail()==true)
+            vista.SetP1Location(orig,axis);
+        else if(player == 1 && casilla==10)
+            vista.SetP1Location(orig+60,axis);       
+        else if(player == 1)
+            vista.SetP1Location(orig,axis); 
+        else if(player == 2 && casilla==10 && Core.listaJugadores.get(2).isInJail()==true)
+            vista.SetP2Location(orig+25,axis);
+        else if(player == 2 && casilla==10)
+            vista.SetP2Location(orig+60,axis+30);
+        else if(player==2)
             vista.SetP2Location(orig+20,axis);
-        else if(player == 3)
+        else if(player == 3 && casilla==10 && Core.listaJugadores.get(3).isInJail()==true)
             vista.SetP3Location(orig,axis+30);
-        else if(player == 4)
-            vista.SetP4Location(orig+30,axis+20);
+        else if(player == 3 && casilla==10)
+            vista.SetP3Location(orig,axis+60);
+        else if(player==3)
+            vista.SetP3Location(orig,axis+30);
+        else if(player == 4 && casilla==10 && Core.listaJugadores.get(4).isInJail()==true)
+            vista.SetP4Location(orig+25,axis+30);
+        else if(player == 4 && casilla==10)
+            vista.SetP4Location(orig+50,axis+55);
+        else if(player==4)
+            vista.SetP4Location(orig+25,axis+20);
 
     }
 
