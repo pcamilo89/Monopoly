@@ -6,6 +6,9 @@
 
 package model;
 
+import javax.swing.JFrame;
+import view.MyDialog;
+
 /**
  *
  * @author Camilo
@@ -27,4 +30,9 @@ public class Utils {
     
     public static String CLIENT_SERVER_IP = "192.168.1.4";
     public static int CLIENT_SERVER_PORT = 6565;
+    
+    public static void textDialog(String text, JFrame father){
+        MyDialog dialog = new MyDialog(father, "TITULO", text, false);
+        dialog.setVisible(true);
+    }
 }

@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Core;
+import model.Player;
 import view.ChatPanel;
 import view.TableroView;
 
@@ -113,30 +114,31 @@ public class TableroViewController {
         TableroViewController.MovePiece(Core.listaJugadores.get(2).getPosition(),3);
         TableroViewController.MovePiece(Core.listaJugadores.get(3).getPosition(),4);
         vista.GetPlayer().setText(Core.jugadorLocal.getName());
+        vista.setTitle(Core.jugadorLocal.getName());
         vista.getNameC().setText(Core.getCasilla());
     }
     
-    public static void FillInfoPlayer(String name,String lastname,String balance,int index)
+    public static void FillInfoPlayer(Player player,int index)
     {
         if(index==1){
-            vista.getNamePlayer(1).setText("Nombre:"+name);
-            vista.getLastPLayer(1).setText("Apellido:"+lastname);
-            vista.getBalPlayer(1).setText("Balance:"+balance);
+            vista.getNamePlayer(1).setText(player.getName()+" "+player.getLastname());
+            vista.getLastPLayer(1).setText("Estado:"+String.valueOf(player.isInJail()));
+            vista.getBalPlayer(1).setText("Balance:"+player.getBalance());
         }
         if(index==2){
-            vista.getNamePlayer(2).setText("Nombre:"+name);
-            vista.getLastPLayer(2).setText("Apellido:"+lastname);
-            vista.getBalPlayer(2).setText("Balance:"+balance);
+            vista.getNamePlayer(2).setText(player.getName()+" "+player.getLastname());
+            vista.getLastPLayer(2).setText("Estado:"+String.valueOf(player.isInJail()));
+            vista.getBalPlayer(2).setText("Balance:"+player.getBalance());
         }
         if(index==3){
-            vista.getNamePlayer(3).setText("Nombre:"+name);
-            vista.getLastPLayer(3).setText("Apellido:"+lastname);
-            vista.getBalPlayer(3).setText("Balance:"+balance);
+            vista.getNamePlayer(3).setText(player.getName()+" "+player.getLastname());
+            vista.getLastPLayer(3).setText("Estado:"+String.valueOf(player.isInJail()));
+            vista.getBalPlayer(3).setText("Balance:"+player.getBalance());
         }
         if(index==4){
-            vista.getNamePlayer(4).setText("Nombre:"+name);
-            vista.getLastPLayer(4).setText("Apellido:"+lastname);
-            vista.getBalPlayer(4).setText("Balance:"+balance);
+            vista.getNamePlayer(4).setText(player.getName()+" "+player.getLastname());
+            vista.getLastPLayer(4).setText("Estado:"+String.valueOf(player.isInJail()));
+            vista.getBalPlayer(4).setText("Balance:"+player.getBalance());
         }
     }
     

@@ -3,6 +3,7 @@ package view;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UnsupportedLookAndFeelException;
+import model.Core;
 
 public class MainClient {
     
@@ -32,7 +33,7 @@ public class MainClient {
         
         ClientView clientView = new ClientView();
         clientView.setVisible(true);
-        
+        Core.frameActual = clientView;
         //TableroView tablero = new TableroView();
         //tablero.setVisible(true);
     }

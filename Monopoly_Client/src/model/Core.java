@@ -7,12 +7,15 @@
 package model;
 
 import java.util.ArrayList;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Camilo
  */
 public class Core {
+    public static JFrame frameActual;
+    
     public static Client client;
     
     public static ArrayList<Player> listaJugadores;

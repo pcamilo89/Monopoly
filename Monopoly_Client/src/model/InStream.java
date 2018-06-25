@@ -67,7 +67,10 @@ public class InStream extends Thread{
                 }
                 else if ( valuesArray[0].equals("msg") ) {
                     receivedMsg(valuesArray[1]);
-                }                
+                }
+                else if ( valuesArray[0].equals("alert") ) {
+                    alertMsg(valuesArray[1]);
+                }
                 else if ( valuesArray[0].equals("exit") ) {
                     receivedMsg(Utils.CLIENT_DISCONNECT_MSG);
                 }                
@@ -138,7 +141,7 @@ public class InStream extends Thread{
         TableroView tablero = new TableroView();
         
         tablero.setVisible(true);
-        
+        Core.frameActual = tablero;
         TableroViewController.setActivePlayers();
     }
     
@@ -158,7 +161,7 @@ public class InStream extends Thread{
 	int i=1;
         for (Player act :Core.listaJugadores)
         {
-           TableroViewController.FillInfoPlayer(act.getName(),act.getLastname(),String.valueOf(act.getBalance()),i);
+           TableroViewController.FillInfoPlayer(act,i);
            if(act.getBalance()==0 && act.isActivo()==false)
            {
            TableroViewController.HidePlayer(i);
@@ -205,5 +208,9 @@ public class InStream extends Thread{
     
     public void chatMsg(String user, String text) {
         ChatPanelController.addUserText(user, text);
+    }
+    
+    public void alertMsg(String msg){
+        Utils.textDialog(msg, Core.frameActual);
     }
 }

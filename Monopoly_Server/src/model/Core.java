@@ -245,6 +245,7 @@ public class Core {
                 act.setPosition(10);
                 
                 sendPlayerInfo(act);
+                Core.server.getConnByUsername(playerActual).sendMsg("alert;As Caido en la Carcel.");
                 nextPlayerTurn();
                 sendPlayerInTurn();
             }
