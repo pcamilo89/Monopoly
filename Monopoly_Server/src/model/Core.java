@@ -174,7 +174,7 @@ public class Core {
             }
         }
         
-        Core.msgAllPlayers(msg);
+        Core.msgServerAllPlayers(msg);
         //se envia informacion de todos los jugadores
         sendPlayerInfo();
         //se envia jugador actual
@@ -188,7 +188,7 @@ public class Core {
             String msg = "updateuser;"+act.getUser().getUsername()+";"+act.getUser().getName()+";"+act.getUser().getLastname();
             msg += ";"+act.getPosition()+";"+act.getBalance()+";"+act.isInJail();
             
-            msgAllPlayers(msg);
+            msgServerAllPlayers(msg);
         }
     }
     
@@ -196,7 +196,7 @@ public class Core {
             String msg = "updateuser;"+act.getUser().getUsername()+";"+act.getUser().getName()+";"+act.getUser().getLastname();
             msg += ";"+act.getPosition()+";"+act.getBalance()+";"+act.isInJail();
             
-            msgAllPlayers(msg);
+            msgServerAllPlayers(msg);
     }
     
     public static Player getPlayerByUsername(String username){
@@ -214,7 +214,7 @@ public class Core {
     public static void sendPlayerInTurn(){
         String username = playerList.get(turn).getUser().getUsername();
         playerActual = username;
-        msgAllPlayers("actualturn;"+username);
+        msgServerAllPlayers("actualturn;"+username);
         Player player = getPlayerByUsername(username);
         player.setContJail(player.getContJail()+1);
     }    
@@ -238,7 +238,7 @@ public class Core {
         Player act = getPlayerByUsername(playerActual);
         
         Core.dados = Utils.lanzarDados();
-        Core.msgAllPlayers("lanzardado;"+Core.dados[0]+";"+Core.dados[1]);
+        Core.msgServerAllPlayers("lanzardado;"+Core.dados[0]+";"+Core.dados[1]);
         
         boolean passGo = false;
         
@@ -260,8 +260,11 @@ public class Core {
                 //notificar a todos posicion nueva
                 if(passGo){
                     act.setBalance(act.getBalance() + 200);
-                }
+                }                
                 act.setPosition(pos);
+                //se ejecuta accion del tablero
+                Core.boardList.get(act.getPosition()).execute(act);
+                
                 sendPlayerInfo(act);
                 //enviar mensaje de turno al mismo jugador
                 sendPlayerInTurn();
@@ -272,8 +275,9 @@ public class Core {
                 act.setContJail(0);
                 act.setPosition(10);
                 
+                //ALERT AQUI
+                
                 sendPlayerInfo(act);
-                Core.server.getConnByUsername(playerActual).sendMsg("alert;As Caido en la Carcel.");
                 nextPlayerTurn();
                 sendPlayerInTurn();
             }
@@ -284,6 +288,10 @@ public class Core {
                     act.setBalance(act.getBalance() + 200);
                 }
                 act.setPosition(pos);
+                
+                //se ejecuta accion del tablero
+                Core.boardList.get(act.getPosition()).execute(act);
+                
                 sendPlayerInfo(act);
                 //resetear contador de dobles
                 act.setContJail(0);
@@ -301,6 +309,10 @@ public class Core {
                 act.setContJail(0);
 
                 act.setPosition(pos);
+                
+                //se ejecuta accion del tablero
+                Core.boardList.get(act.getPosition()).execute(act);
+                
                 sendPlayerInfo(act);
 
                 //enviar mensaje de turno al siguiente jugador
@@ -328,6 +340,10 @@ public class Core {
                 }
                 
                 act.setPosition(pos);
+                
+                //se ejecuta accion del tablero
+                Core.boardList.get(act.getPosition()).execute(act);
+                
                 sendPlayerInfo(act);                
                 
                 //enviar mensaje de turno al siguiente jugador
@@ -335,6 +351,36 @@ public class Core {
                 sendPlayerInTurn();
             }
         }
+    }
+    
+    /**
+     * se utiliza para mandar protocolo a todos los jugadores
+     * @param msg 
+     */
+    public static void msgServerAllPlayers(String msg){
+        for(Player act : Core.playerList){
+            msgPlayer(act.getUser().getUsername(), msg);
+        }
+    }
+    
+    public static void msgAllPlayers(String msg){
+        for(Player act : Core.playerList){
+            msgPlayer(act.getUser().getUsername(), "msg;"+msg);
+        }
+    }
+    
+    public static void alertAllPlayers(String msg){
+        for(Player act : Core.playerList){
+            alertPlayer(act.getUser().getUsername(), msg);
+        }
+    }
+    
+    public static void msgPlayer(String username, String msg){
+        Core.server.getConnByUsername(username).sendMsg(msg);
+    }
+    
+    public static void alertPlayer(String username, String msg){
+        Core.server.getConnByUsername(username).sendMsg("alert;"+msg);
     }
     
     public static void initPlayers(){
@@ -349,25 +395,6 @@ public class Core {
     public static void printPlayers(){
         for(Player act : playerList){
             System.out.println(act.toString());
-        }
-    }
-    
-    public static void msgAllPlayers(String msg){
-        for(Player act : playerList){
-            String username = act.getUser().getUsername();
-            
-            Connection conn = server.getConnByUsername(username);
-            conn.sendMsg(msg);
-        }
-    }
-    
-    public static void msgPlayer(String username, String msg){
-        for(Player act : playerList){
-            if(act.getUser().getUsername().equals(username)) {
-                Connection conn = server.getConnByUsername(username);
-                conn.sendMsg(msg);
-            }
-            break;
         }
     }
     

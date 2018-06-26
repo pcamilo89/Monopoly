@@ -257,6 +257,10 @@ public class BoardProperty extends BoardOwnable{
             amount = 0;
         }
         
+        if(amount > 0){
+            Core.msgAllPlayers(player.getUser().getName()+" ha pagado a "+this.getOwner().getUser().getName()+ "la renta de "+ amount + " por visitar "+ this.getName());
+        }
+        
         if(player.getBalance() > amount){
             player.setBalance(player.getBalance() - amount);
             getOwner().setBalance(getOwner().getBalance() + amount);
@@ -270,6 +274,7 @@ public class BoardProperty extends BoardOwnable{
         if (this.getOwner() == null) {                       
             if( player.getBalance() > getPrice() ){
                 buy(player);
+                Core.msgAllPlayers(player.getUser().getName()+" ha comprado "+this.getName()+ " por "+ this.getPrice());
             }
             else{
                 Core.playerBankruptcy(player);
