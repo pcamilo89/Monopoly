@@ -17,6 +17,13 @@ public class BoardUtility extends BoardOwnable{
     }
 
     @Override
+    public String toString() {
+        return "BoardUtility{" +super.toString()+ '}';
+    }
+
+    
+    
+    @Override
     public void rent(Player player) {
         int count = 0;
         //se busca las BoardUtility en la lista y se verifica si mismo dueño

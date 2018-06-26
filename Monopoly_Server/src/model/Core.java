@@ -58,9 +58,9 @@ public class Core {
         
         //llenar lista tablero
         fillBoard();
-        //falta llenar listas de cartas y la listatablero
-        chanceList = getCardList(CardType.CHANCE);
-        communityList = getCardList(CardType.COMMUNITY);
+        //llenar listas de cartas
+        fillChanceCardList();
+        fillCommunityCardList();
     }
     
     public static void fillBoard(){
@@ -74,8 +74,36 @@ public class Core {
         boardList.add(new BoardGrabCard(CardType.CHANCE));
         boardList.add(new BoardProperty(GroupColor.LIGHT_BLUE, 50, 6, 30, 90, 270, 400, 550, "Av. Vermont", 100, 50));
         boardList.add(new BoardProperty(GroupColor.LIGHT_BLUE, 50, 8, 40, 100, 300, 450, 600, "Av. Connecticut", 120, 60));
-        boardList.add(new BoardPlain("Jail"));
-        
+        boardList.add(new BoardPlain("Carcel"));
+        boardList.add(new BoardProperty(GroupColor.LIGHT_PURPLE, 100, 10, 50, 150, 450, 625, 750, "Plaza San Carlos", 140, 70));
+        boardList.add(new BoardUtility("Compañia Electriciad", 150, 75));
+        boardList.add(new BoardProperty(GroupColor.LIGHT_PURPLE, 100, 10, 50, 150, 450, 625, 750, "Av. de los Estadios", 140, 70));
+        boardList.add(new BoardProperty(GroupColor.LIGHT_PURPLE, 100, 12, 60, 180, 500, 700, 900, "Av. Virginia", 160, 80));
+        boardList.add(new BoardRailroad("Ferrocarril Pensilvania", 200, 100));
+        boardList.add(new BoardProperty(GroupColor.ORANGE, 100, 14, 70, 200, 550, 750, 950, "Plaza Santiago", 180, 90));
+        boardList.add(new BoardGrabCard(CardType.COMMUNITY));
+        boardList.add(new BoardProperty(GroupColor.ORANGE, 100, 14, 70, 200, 550, 750, 950, "Av. Tennessee", 180, 90));
+        boardList.add(new BoardProperty(GroupColor.ORANGE, 100, 16, 80, 220, 600, 800, 1000, "Av. Nueva York", 200, 100));
+        boardList.add(new BoardPlain("Parada Libre"));
+        boardList.add(new BoardProperty(GroupColor.RED, 150, 18, 90, 250, 700, 875, 1050, "Av. Kentuky", 220, 110));
+        boardList.add(new BoardGrabCard(CardType.CHANCE));
+        boardList.add(new BoardProperty(GroupColor.RED, 150, 18, 90, 250, 700, 875, 1050, "Av. Indiana", 220, 110));
+        boardList.add(new BoardProperty(GroupColor.RED, 150, 20, 100, 300, 750, 925, 1100, "Av. Indiana", 240, 120));
+        boardList.add(new BoardRailroad("Ferrocarril B & O", 200, 100));
+        boardList.add(new BoardProperty(GroupColor.YELLOW, 150, 22, 110, 330, 800, 975, 1150, "Av. Atlantico", 260, 130));
+        boardList.add(new BoardProperty(GroupColor.YELLOW, 150, 22, 110, 330, 800, 975, 1150, "Av. Ventnor", 260, 130));
+        boardList.add(new BoardUtility("Obras de Agua Potable", 150, 75));
+        boardList.add(new BoardProperty(GroupColor.YELLOW, 150, 24, 120, 360, 850, 1025, 1200, "Jardines Marvin", 280, 140));
+        boardList.add(new BoardGoToJail("Vayase a la Carcel!"));
+        boardList.add(new BoardProperty(GroupColor.GREEN, 200, 26, 130, 390, 900, 1100, 1275, "Av. Pacifico", 300, 150));
+        boardList.add(new BoardProperty(GroupColor.GREEN, 200, 26, 130, 390, 900, 1100, 1275, "Av. Carolina del Norte", 300, 150));
+        boardList.add(new BoardGrabCard(CardType.COMMUNITY));
+        boardList.add(new BoardProperty(GroupColor.GREEN, 200, 28, 150, 450, 1000, 1200, 1400, "Av. Pensilvania", 320, 160));
+        boardList.add(new BoardRailroad("Ferrocarril Short Line", 200, 100));
+        boardList.add(new BoardGrabCard(CardType.CHANCE));
+        boardList.add(new BoardProperty(GroupColor.DARK_BLUE, 200, 35, 175, 500, 1100, 1300, 1500, "Plaza del Parque", 350, 175));
+        boardList.add(new BoardRemoveAmount("Impuesto al Lujo", 100));
+        boardList.add(new BoardProperty(GroupColor.DARK_BLUE, 200, 50, 200, 600, 1400, 1700, 2000, "Paseo Tablado", 400, 200));
     }
     
     public static void startServer(int port){
@@ -445,7 +473,7 @@ public class Core {
         return data;
     }
     
-    public static void fillChanceCardList(ArrayList<Card> list)
+    public static void fillChanceCardList()
     {
         chanceList.add(new CardGoToJail(CardType.CHANCE, 0, "Ve directamente a la carcel. No pasas por GO. No colectas $200"));
         chanceList.add(new CardJumpTo(CardType.CHANCE,0,"Avanza a Illinois Ave. Si pasas por GO colectas $200"));
@@ -460,10 +488,9 @@ public class Core {
         chanceList.add(new CardOutOfJail(CardType.CHANCE, 0, "Sal de la carcel gratis"));
         chanceList.add(new CardRemoveAmount(CardType.CHANCE, 15, "Paga tus impuestos, $15"));
         chanceList.add(new CardAmountToPlayers(CardType.CHANCE, 50, "Has sido elegido Chairman de la partida. Paga a cada jugador $50"));
-        System.out.println("chanceList: "+new String(chanceList.toString()));
     }
     
-    public static void fillCommunityCardList(ArrayList<Card> list)
+    public static void fillCommunityCardList()
     {
         communityList.add(new CardJumpTo(CardType.COMMUNITY,0, "Ve a GO. Colecta $200"));
         communityList.add(new CardAddAmount(CardType.COMMUNITY,200,"Error del banco a tu favor. Colecta $200"));
@@ -481,6 +508,5 @@ public class Core {
         communityList.add(new CardTax(40,150,CardType.COMMUNITY, 0, "Haz sido juzgado para reparaciones de calle, $40 por casa, $115 por hotel"));
         communityList.add(new CardAddAmount(CardType.COMMUNITY, 10, "Haz quedado en segundo lugar en un concurso de belleza. Colecta $10"));
         communityList.add(new CardAddAmount(CardType.COMMUNITY, 100, "Haz heredado $100"));
-        System.out.println("communityList: "+new String(communityList.toString()));
     }
 }

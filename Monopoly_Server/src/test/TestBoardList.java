@@ -19,5 +19,6 @@ public class TestBoardList {
         for (Board board : Core.boardList){
             System.out.println(board);
         }
+        System.out.println("Tamaño: " + Core.boardList.size());
     }
 }
