@@ -88,7 +88,7 @@ public class Core {
         boardList.add(new BoardProperty(GroupColor.RED, 150, 18, 90, 250, 700, 875, 1050, "Av. Kentuky", 220, 110));
         boardList.add(new BoardGrabCard(CardType.CHANCE));
         boardList.add(new BoardProperty(GroupColor.RED, 150, 18, 90, 250, 700, 875, 1050, "Av. Indiana", 220, 110));
-        boardList.add(new BoardProperty(GroupColor.RED, 150, 20, 100, 300, 750, 925, 1100, "Av. Indiana", 240, 120));
+        boardList.add(new BoardProperty(GroupColor.RED, 150, 20, 100, 300, 750, 925, 1100, "Av. Illinois", 240, 120));
         boardList.add(new BoardRailroad("Ferrocarril B & O", 200, 100));
         boardList.add(new BoardProperty(GroupColor.YELLOW, 150, 22, 110, 330, 800, 975, 1150, "Av. Atlantico", 260, 130));
         boardList.add(new BoardProperty(GroupColor.YELLOW, 150, 22, 110, 330, 800, 975, 1150, "Av. Ventnor", 260, 130));
@@ -475,19 +475,22 @@ public class Core {
     
     public static void fillChanceCardList()
     {
-        chanceList.add(new CardGoToJail(CardType.CHANCE, 0, "Ve directamente a la carcel. No pasas por GO. No colectas $200"));
-        chanceList.add(new CardJumpTo(CardType.CHANCE,0,"Avanza a Illinois Ave. Si pasas por GO colectas $200"));
-        chanceList.add(new CardJumpTo(CardType.CHANCE,0,"Avanza a St Charles Place. Si pasas por GO colectas $200"));
-        chanceList.add(new CardMoveBack(CardType.CHANCE,0,"Retrocede 3 pasos"));
-        chanceList.add(new CardJumpTo(CardType.CHANCE,0,"Ve a GO. Colecta $200"));
-        chanceList.add(new CardNearest(CardType.CHANCE, 0, "Ve a la utilidad mas cercana. Si no esta comprada, se la puede comprar al banco. Si esta comprada, arroje los dados y paguese al propietario 10 veces el numero obtenido"));
-        chanceList.add(new CardNearest(CardType.CHANCE, 1, "Ve al Railroad mas cercano. Si esta comprada, paguese al propietario el doble de la renta que tenga. Si no esta comprada, se la puede comprar al banco"));
+        chanceList.add(new CardJumpTo(CardType.CHANCE, 0, "Avanza a GO. Colecta 200"));
+        chanceList.add(new CardJumpTo(CardType.CHANCE,24,"Avanza a Av. Illinoise. Si pasas por GO colectas $200"));
+        chanceList.add(new CardJumpTo(CardType.CHANCE,11,"Avanza a Plaza San Carlos. Si pasas por GO colectas $200"));
+        chanceList.add(new CardNearest(CardType.CHANCE, 0, "Ve a la Utilidad mas cercana. Si no esta comprada, se la puede comprar al banco. Si esta comprada, arroje los dados y paguese al propietario 10 veces el numero obtenido"));
+        chanceList.add(new CardNearest(CardType.CHANCE, 1, "Ve al Ferrocarril mas cercano. Si esta comprada, paguese al propietario el doble de la renta que tenga. Si no esta comprada, se la puede comprar al banco"));
         chanceList.add(new CardAddAmount(CardType.CHANCE,50,"El banco te paga $50"));
-        chanceList.add(new CardAddAmount(CardType.CHANCE, 150, "Tus edificios y prestamos han madurado. Colecta $150"));
-        chanceList.add(new CardAddAmount(CardType.CHANCE, 100, "Has ganado una competencia de crucigramas, Colecta $100"));
         chanceList.add(new CardOutOfJail(CardType.CHANCE, 0, "Sal de la carcel gratis"));
+        chanceList.add(new CardMoveBack(CardType.CHANCE,3,"Retrocede 3 pasos"));
+        chanceList.add(new CardGoToJail(CardType.CHANCE, 0, "Ve directamente a la carcel. No pasas por GO. No colectas $200"));
+        chanceList.add(new CardTax(25,100,CardType.CHANCE, 0, "Haz reparaciones generales a tus propiedades, $25 por casa, $100 por hotel"));
         chanceList.add(new CardRemoveAmount(CardType.CHANCE, 15, "Paga tus impuestos, $15"));
-        chanceList.add(new CardAmountToPlayers(CardType.CHANCE, 50, "Has sido elegido Chairman de la partida. Paga a cada jugador $50"));
+        chanceList.add(new CardJumpTo(CardType.CHANCE,5, "Ve a Ferrocarril Reading. Si pasas por GO colectas $200"));
+        chanceList.add(new CardJumpTo(CardType.CHANCE,39, "Ve a caminar al Paseo Tablado. Si pasas por GO colectas $200"));
+        chanceList.add(new CardAmountToPlayers(CardType.CHANCE, 50, "Has sido elegido Presidente de la partida. Paga a cada jugador $50"));
+        chanceList.add(new CardAddAmount(CardType.CHANCE, 150, "Tus edificios y prestamos han madurado. Colecta $150"));
+        chanceList.add(new CardAddAmount(CardType.CHANCE, 100, "Has ganado una competencia de crucigramas, Colecta $100"));        
     }
     
     public static void fillCommunityCardList()
@@ -505,7 +508,7 @@ public class Core {
         communityList.add(new CardRemoveAmount(CardType.COMMUNITY, 100, "Paga $100 en la factura del hospital"));
         communityList.add(new CardRemoveAmount(CardType.COMMUNITY, 150, "Paga $150 en la factura del colegio"));
         communityList.add(new CardAddAmount(CardType.COMMUNITY, 25, "Recibe $25 por trabajos de consultor"));
-        communityList.add(new CardTax(40,150,CardType.COMMUNITY, 0, "Haz sido juzgado para reparaciones de calle, $40 por casa, $115 por hotel"));
+        communityList.add(new CardTax(40,115,CardType.COMMUNITY, 0, "Haz sido juzgado para reparaciones de calle, $40 por casa, $115 por hotel"));
         communityList.add(new CardAddAmount(CardType.COMMUNITY, 10, "Haz quedado en segundo lugar en un concurso de belleza. Colecta $10"));
         communityList.add(new CardAddAmount(CardType.COMMUNITY, 100, "Haz heredado $100"));
     }

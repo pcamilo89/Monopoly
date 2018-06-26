@@ -5,8 +5,8 @@
  */
 package test;
 
+import model.Card;
 import model.Core;
-import static model.Core.initCore;
 
 /**
  *
@@ -16,8 +16,18 @@ public class TestCommunityAndChanceList
 {
     public static void main(String[] args)
     {
-        initCore();
-        model.Core.fillChanceCardList(Core.chanceList);
-        model.Core.fillCommunityCardList(Core.communityList);
+        Core.initCore();
+        System.out.println("Chance:");
+        System.out.println("Tamaño: " + Core.chanceList.size());
+        for(Card card: Core.chanceList){
+            System.out.println(card.toString());
+        }
+        
+        System.out.println("Community:");
+        System.out.println("Tamaño: " + Core.communityList.size());
+        for(Card card: Core.communityList){
+            System.out.println(card.toString());
+        }
+
     }
 }

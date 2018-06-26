@@ -46,6 +46,11 @@ public abstract class Card {
         this.amount = amount;
         this.text = text;
     }
+
+    @Override
+    public String toString() {
+        return "Card{" + "type=" + type + ", amount=" + amount + ", text=" + text + '}';
+    }
     
     public abstract void execute(Player player);        
 }
