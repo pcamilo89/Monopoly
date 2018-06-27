@@ -22,23 +22,8 @@ public class CardGoToJail extends Card{
         player.setPosition(10);
         player.setInJail(true);
         
-        //se chequea si el jugador tiene carta de salir de la carcel y se le retira y se coloca como visitante de carcel
-        if( player.getCardList().size() > 0){
-            Card card = player.getCardList().get(0);
-            if(card != null){
-                player.getCardList().remove(card);
-            
-                if(card.getType() == Utils.CardType.COMMUNITY){
-                    Core.communityList.add(card);
-                }
-                else if(card.getType() == Utils.CardType.CHANCE){
-                    Core.chanceList.add(card);
-                }
-
-                player.setInJail(false);
-            }
-            
-        }
+        //metodo verifica tarjetas de salir de la carcel
+        Core.playerHasCardOutOfJail(player);
         
     }
     

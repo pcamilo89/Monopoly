@@ -284,6 +284,7 @@ public class Core {
                 act.setPosition(10);                
                 
                 alertAllPlayers(playerActual+ " ha sacado 3 dobles seguidos, por penalizacion va a la Carcel.");
+                playerHasCardOutOfJail(act);
                 
                 sendPlayerInfo(act);
                 nextPlayerTurn();
@@ -553,5 +554,26 @@ public class Core {
         communityList.add(new CardTax(40,115,CardType.COMMUNITY, 0, "Haz sido juzgado para reparaciones de calle, $40 por casa, $115 por hotel"));
         communityList.add(new CardAddAmount(CardType.COMMUNITY, 10, "Haz quedado en segundo lugar en un concurso de belleza. Colecta $10"));
         communityList.add(new CardAddAmount(CardType.COMMUNITY, 100, "Haz heredado $100"));
+    }
+    
+    public static void playerHasCardOutOfJail(Player player){
+        //se chequea si el jugador tiene carta de salir de la carcel y se le retira y se coloca como visitante de carcel
+        if( player.getCardList().size() > 0){
+            Card card = player.getCardList().get(0);
+            if(card != null){
+                player.getCardList().remove(card);
+            
+                if(card.getType() == Utils.CardType.COMMUNITY){
+                    Core.communityList.add(card);
+                }
+                else if(card.getType() == Utils.CardType.CHANCE){
+                    Core.chanceList.add(card);
+                }
+
+                player.setInJail(false);
+                Core.alertAllPlayers(player.getUser().getUsername()+ " ha utilizado carta de salid de la carcel.");
+            }
+            
+        }
     }
 }
