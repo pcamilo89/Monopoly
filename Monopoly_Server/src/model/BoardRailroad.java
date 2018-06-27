@@ -44,7 +44,7 @@ public class BoardRailroad extends BoardOwnable{
         }
         
         if(amount > 0){
-            Core.msgAllPlayers(player.getUser().getName()+" ha pagado a "+this.getOwner().getUser().getName()+ "la renta de "+ amount + " por visitar "+ this.getName());
+            Core.msgAllPlayers(player.getUser().getName()+" ha pagado a "+this.getOwner().getUser().getName()+ " la renta de "+ amount + " por visitar "+ this.getName());
         }
         
         if (player.getBalance() > amount){

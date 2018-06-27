@@ -212,11 +212,19 @@ public class Core {
      * 
      */
     public static void sendPlayerInTurn(){
-        String username = playerList.get(turn).getUser().getUsername();
-        playerActual = username;
-        msgServerAllPlayers("actualturn;"+username);
-        Player player = getPlayerByUsername(username);
-        player.setContJail(player.getContJail()+1);
+        if(Core.playerList.size()>1){
+            String username = playerList.get(turn).getUser().getUsername();
+            playerActual = username;
+            msgServerAllPlayers("actualturn;"+username);
+            Player player = getPlayerByUsername(username);
+            player.setContJail(player.getContJail()+1);            
+        }else{
+            juegoEnCurso = false;
+            String username = playerList.get(turn).getUser().getUsername();
+            playerActual = username;
+            String msg = "VICTORIA, "+ playerActual +  " eres el ultimo en la partida.";
+            alertAllPlayers(msg);
+        }            
     }    
     
     public static Player getJugadorActual(){
@@ -273,9 +281,9 @@ public class Core {
             else if(dados[0]==dados[1] && act.getContJail() == 3){
                 act.setInJail(true);
                 act.setContJail(0);
-                act.setPosition(10);
+                act.setPosition(10);                
                 
-                //ALERT AQUI
+                alertAllPlayers(playerActual+ " ha sacado 3 dobles seguidos, por penalizacion va a la Carcel.");
                 
                 sendPlayerInfo(act);
                 nextPlayerTurn();
@@ -315,12 +323,15 @@ public class Core {
                 
                 sendPlayerInfo(act);
 
+                alertAllPlayers(playerActual+ " ha sacado dobles, puede salir de la carcel.");
                 //enviar mensaje de turno al siguiente jugador
                 nextPlayerTurn();
                 sendPlayerInTurn();
             }
             else if(dados[0]!=dados[1] && act.getContJail() < 3){
                 //enviar mensaje de turno al siguiente jugador
+                
+                alertAllPlayers(playerActual+ " ha sacado no ha dobles seguidos, se queda en la Carcel.");
                 nextPlayerTurn();
                 sendPlayerInTurn();
             }
@@ -333,6 +344,7 @@ public class Core {
                 int fine = 50;
                 
                 if ( act.getBalance() > fine ) {
+                    alertAllPlayers(playerActual+ " al tercer turno, ha pagado "+fine+" para salir de la Carcel.");
                     act.setBalance(act.getBalance() - fine);
                 }
                 else{
@@ -484,7 +496,7 @@ public class Core {
             if(board.getClass().equals(BoardProperty.class)){
                 BoardProperty temp = (BoardProperty) board;
                 //se chequea que el dueño sea el username recibido
-                if(temp.getOwner().getUser().getUsername().equals(username)){
+                if( temp.getOwner() != null && temp.getOwner().getUser().getUsername().equals(username) ){
                     //si la cuenta es 5 es un hotel
                     if(temp.getNumHouses() > 4 ){
                         contHotel++;

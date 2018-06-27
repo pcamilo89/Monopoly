@@ -43,6 +43,10 @@ public class BoardUtility extends BoardOwnable{
             amount = ( Core.dados[0]+Core.dados[1] ) * 10;
         }
         
+        if(amount > 0){
+            Core.msgAllPlayers(player.getUser().getName()+" ha pagado a "+this.getOwner().getUser().getName()+ " la renta de "+ amount + " por visitar "+ this.getName());
+        }        
+        
         if (player.getBalance() > amount){
             //se paga alquiler
             getOwner().setBalance(getOwner().getBalance() + amount);
