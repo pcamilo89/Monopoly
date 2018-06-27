@@ -28,6 +28,9 @@ public class BoardRemoveAmount extends Board{
         //si el jugador tiene balance mayor a la cantidad.
         if (player.getBalance() > amount) {
             player.setBalance(player.getBalance() - amount);
+            String msg = player.getUser().getName()+ " ha pagado " + this.getName() + " por " + amount;
+            Core.msgAllPlayers(msg);
+            Core.alertPlayer(player.getUser().getUsername(), msg);
         }
         else {
             Core.playerBankruptcy(player);

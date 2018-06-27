@@ -213,9 +213,9 @@ public class BoardProperty extends BoardOwnable{
                 if(board.getClass().equals(this.getClass())){
                     BoardProperty temp = (BoardProperty) board;
                     //se chequea si es del mismo grupo color y el dueño es distinto
-                    if(temp.getGroup().equals(this.getGroup()) &&  !temp.getOwner().equals(this.getOwner()) ){
-                        //se retorna falso
-                        return false;
+                    if( temp.getGroup().equals( this.getGroup() ) ){
+                        if( temp.getOwner() == null || !temp.getOwner().getUser().getName().equals( this.getOwner().getUser().getName() ) )
+                            return false;
                     }
                 }
             }
@@ -258,7 +258,9 @@ public class BoardProperty extends BoardOwnable{
         }
         
         if(amount > 0){
-            Core.msgAllPlayers(player.getUser().getName()+" ha pagado a "+this.getOwner().getUser().getName()+ "la renta de "+ amount + " por visitar "+ this.getName());
+            String msg = player.getUser().getName()+" ha pagado a "+this.getOwner().getUser().getName()+ " la renta de "+ amount + " por visitar "+ this.getName();
+            Core.msgAllPlayers(msg);
+            Core.alertAllPlayers(msg);
         }
         
         if(player.getBalance() > amount){
@@ -274,14 +276,18 @@ public class BoardProperty extends BoardOwnable{
         if (this.getOwner() == null) {                       
             if( player.getBalance() > getPrice() ){
                 buy(player);
-                Core.msgAllPlayers(player.getUser().getName()+" ha comprado "+this.getName()+ " por "+ this.getPrice());
+                String msg = player.getUser().getName()+" ha comprado "+this.getName()+ " por "+ this.getPrice();
+                Core.msgAllPlayers(msg);
+                Core.alertAllPlayers(msg);
             }
             else{
                 Core.playerBankruptcy(player);
             }
         }
         else{
-            rent(player);
+            //si no eres el dueño pagas renta al visitar
+            if(!this.getOwner().getUser().getUsername().equals(player.getUser().getUsername()))
+                rent(player);
         }
     }
     

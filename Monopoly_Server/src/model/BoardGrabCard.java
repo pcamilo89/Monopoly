@@ -29,8 +29,16 @@ public class BoardGrabCard extends Board{
     
     @Override
     public void execute(Player player) {
+        //se notifica que el jugador ha caido en esta casilla
+        String msg;
+        
         //se busca la carta aleatoria segun el tipo de la casilla
         Card  card = Core.getRandomCard(Core.getCardList(type));
+        
+        msg = player.getUser().getUsername() + " ha tomado la carta " + card.toString();
+        Core.msgAllPlayers(msg);
+        Core.alertAllPlayers(msg);
+        
         //se ejecuta el comando segun la carta seleccionada
         card.execute(player);
     }

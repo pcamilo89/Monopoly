@@ -29,7 +29,7 @@ public class BoardRailroad extends BoardOwnable{
             }
         }
         
-        int amount;
+        int amount = 0;
         if(count == 1){
             amount = 25;
         }
@@ -41,6 +41,10 @@ public class BoardRailroad extends BoardOwnable{
         }
         else {
             amount = 200;
+        }
+        
+        if(amount > 0){
+            Core.msgAllPlayers(player.getUser().getName()+" ha pagado a "+this.getOwner().getUser().getName()+ "la renta de "+ amount + " por visitar "+ this.getName());
         }
         
         if (player.getBalance() > amount){
@@ -66,6 +70,9 @@ public class BoardRailroad extends BoardOwnable{
         else{
             if(player.getBalance() > getPrice()){
                 buy(player);
+                String msg = player.getUser().getName()+" ha comprado "+this.getName()+ " por "+ this.getPrice();
+                Core.msgAllPlayers(msg);
+                Core.alertPlayer(player.getUser().getUsername(), msg);
             }
             else{
                 Core.playerBankruptcy(player);

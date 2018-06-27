@@ -35,7 +35,7 @@ public class BoardUtility extends BoardOwnable{
                 }
             }
         }
-        int amount;
+        int amount = 0;
         if(count == 1){
             amount = ( Core.dados[0]+Core.dados[1] ) * 4;
         }
@@ -64,6 +64,9 @@ public class BoardUtility extends BoardOwnable{
         if (this.getOwner() == null) {                       
             if( player.getBalance() > getPrice() ){
                 buy(player);
+                String msg = player.getUser().getName()+" ha comprado "+this.getName()+ " por "+ this.getPrice();
+                Core.msgAllPlayers(msg);
+                Core.alertPlayer(player.getUser().getUsername(), msg);
             }
             else{
                 Core.playerBankruptcy(player);

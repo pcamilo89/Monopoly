@@ -22,6 +22,10 @@ public class BoardGoToJail extends Board{
         player.setPosition(10);
         player.setInJail(true);
         
+        String msg = player.getUser().getName()+" "+this.getName();
+        Core.msgAllPlayers(msg);
+        Core.alertAllPlayers(msg);
+        
         //se chequea si el jugador tiene carta de salir de la carcel y se le retira y se coloca como visitante de carcel
         if( player.getCardList().size() > 0){
             Card card = player.getCardList().get(0);

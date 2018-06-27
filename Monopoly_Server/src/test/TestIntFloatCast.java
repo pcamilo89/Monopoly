@@ -10,7 +10,7 @@ package test;
  *
  * @author Camilo
  */
-public class testIntFloatCast {
+public class TestIntFloatCast {
     public static void main(String args[]){
         int value =  (int)1.7;
         System.out.println("val:"+value);

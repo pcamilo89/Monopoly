@@ -192,9 +192,9 @@ public class Core {
         }
     }
     
-    public static void sendPlayerInfo(Player act){        
-            String msg = "updateuser;"+act.getUser().getUsername()+";"+act.getUser().getName()+";"+act.getUser().getLastname();
-            msg += ";"+act.getPosition()+";"+act.getBalance()+";"+act.isInJail();
+    public static void sendPlayerInfo(Player player){        
+            String msg = "updateuser;"+player.getUser().getUsername()+";"+player.getUser().getName()+";"+player.getUser().getLastname();
+            msg += ";"+player.getPosition()+";"+player.getBalance()+";"+player.isInJail();
             
             msgServerAllPlayers(msg);
     }
@@ -437,9 +437,14 @@ public class Core {
     }
     
     public static void playerBankruptcy(Player player){
+        
+        Core.alertAllPlayers( playerActual + " ha caido en bancarrota.");
         //se elimina de la lista de jugadores
         Core.playerList.remove(player);
         player.setBalance(0);
+        
+        //se envia a todos los clientes el player con balance 0;
+        Core.sendPlayerInfo(player);
         
         //se le retiran todas las propiedades
         for(Board board :Core.boardList){
@@ -464,10 +469,8 @@ public class Core {
                 }
                 
             }
-        }
+        }        
         
-        //se envia a todos los clientes el player con balance 0;
-        Core.sendPlayerInfo(player);
     }
     
     public static int[] countPlayerHousesAndHotels(String username){
@@ -481,7 +484,7 @@ public class Core {
             if(board.getClass().equals(BoardProperty.class)){
                 BoardProperty temp = (BoardProperty) board;
                 //se chequea que el dueño sea el username recibido
-                if(temp.getOwner().equals(username)){
+                if(temp.getOwner().getUser().getUsername().equals(username)){
                     //si la cuenta es 5 es un hotel
                     if(temp.getNumHouses() > 4 ){
                         contHotel++;
