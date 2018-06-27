@@ -23,7 +23,7 @@ public class BoardRailroad extends BoardOwnable{
         for(Board board: Core.boardList){
             if(board.getClass().equals(this.getClass())){
                 BoardRailroad temp = (BoardRailroad) board;
-                if( temp.getOwner().equals(this.getOwner()) ){
+                if( temp.getOwner() != null && temp.getOwner().getUser().getName().equals( this.getOwner().getUser().getName() ) ){
                     count ++;
                 }
             }
@@ -64,7 +64,7 @@ public class BoardRailroad extends BoardOwnable{
 
     @Override
     public void execute(Player player) {
-        if (this.getOwner() != null){
+        if (this.getOwner() != null && !this.getOwner().getUser().getUsername().equals(player.getUser().getUsername())){
             rent(player);
         }
         else{

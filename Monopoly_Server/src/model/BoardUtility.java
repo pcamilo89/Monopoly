@@ -30,7 +30,7 @@ public class BoardUtility extends BoardOwnable{
         for(Board board: Core.boardList){
             if(board.getClass().equals(this.getClass())){
                 BoardUtility temp = (BoardUtility) board;
-                if( temp.getOwner().equals(this.getOwner()) ){
+                if( temp.getOwner() != null && temp.getOwner().getUser().getName().equals( this.getOwner().getUser().getName() ) ){
                     count ++;
                 }
             }
@@ -73,13 +73,16 @@ public class BoardUtility extends BoardOwnable{
             }
         }
         else{
-            /*  Si tiene dueño lanzar dados en interfaz (instruccion desde utility)
-                1. usar desde cliente lanzardado (para usar valores de dado en core)     
-                2. seguido de otra instruccion (nueva instruccion)
-                3. al recibir instruccion llamar al rent de la siguiente manera            
-                    BoardUtility temp = (BoardUtility) Core.boardList.get( Core.getPlayerByUsername(Core.playerActual).getPosition() );
-                    temp.rent(Core.getPlayerByUsername(Core.playerActual));
-            */
+            if(!this.getOwner().getUser().getUsername().equals(player.getUser().getUsername())){
+                /*  Si tiene dueño lanzar dados en interfaz (instruccion desde utility)
+                    1. usar desde cliente lanzardado (para usar valores de dado en core)     
+                    2. seguido de otra instruccion (nueva instruccion)
+                    3. al recibir instruccion llamar al rent de la siguiente manera            
+                        BoardUtility temp = (BoardUtility) Core.boardList.get( Core.getPlayerByUsername(Core.playerActual).getPosition() );
+                        temp.rent(Core.getPlayerByUsername(Core.playerActual));
+                */
+            }
+                
         }    
     }
     
