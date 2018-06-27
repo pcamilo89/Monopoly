@@ -84,19 +84,19 @@ public class TableroView extends javax.swing.JFrame {
         Panel_Tablero.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         Panel_Tablero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Label_P1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/carr.png"))); // NOI18N
+        Label_P1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/carr.png"))); // NOI18N
         Panel_Tablero.add(Label_P1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, 40, 30));
 
-        Label_P2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
+        Label_P2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/hat.png"))); // NOI18N
         Panel_Tablero.add(Label_P2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 40, 30));
 
-        Label_P3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dog.png"))); // NOI18N
+        Label_P3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/dog.png"))); // NOI18N
         Panel_Tablero.add(Label_P3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, 40, 30));
 
-        Label_P4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dedal.png"))); // NOI18N
+        Label_P4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/dedal.png"))); // NOI18N
         Panel_Tablero.add(Label_P4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 30, -1));
 
-        Label_Tablero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/tabmonpoly.png"))); // NOI18N
+        Label_Tablero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/tabmonpoly.png"))); // NOI18N
         Panel_Tablero.add(Label_Tablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout Label_CGOLayout = new javax.swing.GroupLayout(Label_CGO);
@@ -184,10 +184,10 @@ public class TableroView extends javax.swing.JFrame {
         Panel_PlayerInfo.setPreferredSize(new java.awt.Dimension(400, 100));
         Panel_PlayerInfo.setRequestFocusEnabled(false);
 
-        Label_Dado1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dado1.png"))); // NOI18N
+        Label_Dado1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/dado1.png"))); // NOI18N
         jPanel1.add(Label_Dado1);
 
-        Label_Dado2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dado2.png"))); // NOI18N
+        Label_Dado2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/dado2.png"))); // NOI18N
         jPanel1.add(Label_Dado2);
 
         Button_Throw.setText("texto aqui");
