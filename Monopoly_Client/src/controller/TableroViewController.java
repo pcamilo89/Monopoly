@@ -238,25 +238,25 @@ public class TableroViewController {
             }
             
         }
-        if(player == 1 && casilla==10 && Core.listaJugadores.get(1).isInJail()==true)
+        if(player == 1 && casilla==10 && Core.listaJugadores.get(0).isInJail()==true)
             vista.SetP1Location(orig,axis);
         else if(player == 1 && casilla==10)
             vista.SetP1Location(orig+60,axis);       
         else if(player == 1)
             vista.SetP1Location(orig,axis); 
-        else if(player == 2 && casilla==10 && Core.listaJugadores.get(2).isInJail()==true)
+        else if(player == 2 && casilla==10 && Core.listaJugadores.get(1).isInJail()==true)
             vista.SetP2Location(orig+25,axis);
         else if(player == 2 && casilla==10)
             vista.SetP2Location(orig+60,axis+30);
         else if(player==2)
             vista.SetP2Location(orig+20,axis);
-        else if(player == 3 && casilla==10 && Core.listaJugadores.get(3).isInJail()==true)
+        else if(player == 3 && casilla==10 && Core.listaJugadores.get(2).isInJail()==true)
             vista.SetP3Location(orig,axis+30);
         else if(player == 3 && casilla==10)
             vista.SetP3Location(orig,axis+60);
         else if(player==3)
             vista.SetP3Location(orig,axis+30);
-        else if(player == 4 && casilla==10 && Core.listaJugadores.get(4).isInJail()==true)
+        else if(player == 4 && casilla==10 && Core.listaJugadores.get(3).isInJail()==true)
             vista.SetP4Location(orig+25,axis+30);
         else if(player == 4 && casilla==10)
             vista.SetP4Location(orig+50,axis+55);

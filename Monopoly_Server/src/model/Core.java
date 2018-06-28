@@ -234,9 +234,11 @@ public class Core {
     public static void nextPlayerTurn(){
         turn++;
         int cant = Core.playerList.size()-1;
+        
         if (turn > cant){
             turn = 0;
         }
+        System.out.println("turn:"+turn+" cant:"+cant);
     }
     
     /**
@@ -332,7 +334,7 @@ public class Core {
             else if(dados[0]!=dados[1] && act.getContJail() < 3){
                 //enviar mensaje de turno al siguiente jugador
                 
-                alertAllPlayers(playerActual+ " ha sacado no ha dobles seguidos, se queda en la Carcel.");
+                alertAllPlayers(playerActual+ " no ha sacado dobles, se queda en la Carcel.");
                 nextPlayerTurn();
                 sendPlayerInTurn();
             }
@@ -462,28 +464,31 @@ public class Core {
         //se le retiran todas las propiedades
         for(Board board :Core.boardList){
             //si la casilla es de clase BoardProperty
-            if(board.getClass().equals(BoardOwnable.class)){
+            if(board.getClass().getSuperclass().equals(BoardOwnable.class)){
                 BoardOwnable temp = (BoardOwnable) board;
                 //se chequea que el dueño sea el username recibido
-                temp.setOwner(null);
-                temp.setMortaged(false);
-                
-                if ( temp.getClass().equals(BoardProperty.class) ){
-                    BoardProperty tempPro = (BoardProperty) temp;
-                    //si es tipo property se le retiran las casas y hoteles
+                if(temp.getOwner() != null && temp.getOwner().getUser().getUsername().equals(player.getUser().getUsername())){
+                    temp.setOwner(null);
+                    temp.setMortaged(false);
                     
-                    if(tempPro.getNumHouses() < 5){
-                        Core.houses += tempPro.getNumHouses();
-                        tempPro.setNumHouses(0);
-                    }else if(tempPro.getNumHouses() == 5){
-                        Core.hotels += 1;
-                        tempPro.setNumHouses(0);
-                    }                  
+                    System.out.println("LIMPIANDO PROPIEDAD: "+temp.getName());
+                    
+                    if ( temp.getClass().equals(BoardProperty.class) ){
+                        BoardProperty tempPro = (BoardProperty) temp;
+                        //si es tipo property se le retiran las casas y hoteles
+
+                        if(tempPro.getNumHouses() < 5){
+                            Core.houses += tempPro.getNumHouses();
+                            tempPro.setNumHouses(0);
+                        }else if(tempPro.getNumHouses() == 5){
+                            Core.hotels += 1;
+                            tempPro.setNumHouses(0);
+                        }                  
+                    }
                 }
-                
             }
-        }        
-        
+        }
+        turn--;
     }
     
     public static int[] countPlayerHousesAndHotels(String username){
